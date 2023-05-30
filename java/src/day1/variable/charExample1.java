@@ -1,4 +1,4 @@
-package day1.sample;
+package day1.variable;
 
 public class charExample1 {
 
