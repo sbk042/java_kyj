@@ -26,12 +26,8 @@ public class Ex4_even {
 		if (num % 2 == 0) {
 			System.out.println(num + " is a even number ");
 		}
-		
-		
 		// 닫기
 		sc.close();
-		 
-
 	}
 
 }

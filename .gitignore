@@ -24,3 +24,5 @@ hs_err_pid*
 replay_pid*
 java/.classpath
 java/.project
+java/src/day3/practice/Ex4_even.java
+*.java
