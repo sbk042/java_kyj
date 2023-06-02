@@ -26,3 +26,9 @@ java/.classpath
 java/.project
 java/src/day3/practice/Ex4_even.java
 *.java
+java/src/day3/src/day3/homework/.classpath
+java/src/day3/src/day3/homework/.classpath
+java/src/day3/src/day3/homework/.project
+java/src/day3/src/day3/homework/Ex1_Conditional.java
+java/src/day3/src/day3/homework/Ex2_if.java
+java/src/day3/src/day3/homework/.classpath
