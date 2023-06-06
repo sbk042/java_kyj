@@ -1,5 +1,7 @@
 package day5.homework;
 
+import java.util.Scanner;
+
 public class TeamLeaderEx {
 
 	public static void main(String[] args) {
@@ -16,7 +18,17 @@ public class TeamLeaderEx {
 		 * Student number 6 is the team leader.
 		 */
 		
-		//정수 선언
+		int num;
+		// 입력받을 스캐너 생성
+		Scanner sc = new Scanner(System.in);
+		// 안내문구 출력
+		System.out.println(" input student number : ");
+		// 정수 입력 받기
+		num = sc.nextInt();
+		// switch문 입력
+		switch (num) {
+		case
+		}
 		
 
 	}
