@@ -18,6 +18,11 @@ public class TeamLeaderEx {
 		 * Student number 6 is the team leader.
 		 */
 		
+		// 학생 번호를 입력
+		
+		// 학생 번호가 팀장번호인지 아닌지를 판별
+		// 번호가 3의 배수이면 팀장이라고 출력하고 아니면 팀원이라고 출력
+		
 		int num;
 		// 입력받을 스캐너 생성
 		Scanner sc = new Scanner(System.in);
@@ -25,11 +30,17 @@ public class TeamLeaderEx {
 		System.out.println(" input student number : ");
 		// 정수 입력 받기
 		num = sc.nextInt();
-		// switch문 입력
-		switch (num) {
-		case
+		// switch문 입력 /num를 3으로 나누었을 때 나머지가 0가 같다면 팀장, 아니면 팀원으로 출력
+		// num % 3 == 0
+		switch (num % 3) {
+		case 0 :
+			System.out.println("Student number " + num + " is the team leader");
+			break;
+		default : 
+			System.out.println(" Student number " + num + " is a member of the team");
 		}
 		
+		sc.close();
 
 	}
 
