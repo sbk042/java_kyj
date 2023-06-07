@@ -1,5 +1,7 @@
 package day6.homework;
 
+import java.util.Scanner;
+
 public class DisjointEx {
 
 	public static void main(String[] args) {
@@ -13,6 +15,24 @@ public class DisjointEx {
 		
 		//정수 선언
 		int num1, num2;
+		// 입력받을 스캐너 생성
+		Scanner sc = new Scanner(System.in);
+		// 안내문구 출력
+		System.out.println(" input 2 numbers : ");
+		// 정수 받기
+		num1 = sc.nextInt();
+		num2 = sc.nextInt();
+		// 조건문 작성
+		if(num1,num2 > 2 && num1,num2 % 2 == 0) {
+			System.out.println();
+		}
+		
+		
+		
+		
+		
+		// 닫기
+		sc.close();
 
 	}
 
