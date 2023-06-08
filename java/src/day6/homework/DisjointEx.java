@@ -60,6 +60,7 @@ public class DisjointEx {
 			    }
 				//닫기
 				sc.close();
+				
 
 
 	}
