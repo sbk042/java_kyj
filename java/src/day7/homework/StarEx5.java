@@ -49,8 +49,51 @@ public class StarEx5 {
 			 for(int j = 1 ; j<=i-1 ; j++ ) {
 				 System.out.print('*');
 			 }
-		     System.out.println();
+			 System.out.println();
 
+	}
+	
+	
+	
+	
+	for( int i = 1 ; i <= 4 ; i++ ) {
+		//공백을 출력
+		/* 내부 반복문
+		 * 반복횟수 : j는 1부터 5-i까지 1씩 증가
+		 * 규칙성 : ' '를 출력
+		 * j는 공백
+		 */
+		for( int j = 1; j <= i; j++) {
+			System.out.print(' ');
+		}
+		
+		for( int j = 1 ; j <= 5-i ; j++ ) {
+			System.out.print('*');
+		}
+		
+		for(int j = 1 ; j<= 4-i ; j++ ) {
+			System.out.print('*');
+		}
+		
+		
+		for(int j = 1; j <= i ; j++) {
+			System.out.print(' ');
+		}
+		
+		
+		/* * i개를 출력
+		 * 내부 반복문
+		 * 반복횟수 : j는 1부터 i까지 1씩 증가
+		 * 규칙성 : *을 출력
+		 * 출력 후 엔터
+		 */
+		// *을 i-1개를 출력
+		/* 내부 반복문
+		 * 반복횟수 : j는 1부터 i-1까지 1씩 증가
+		 * 규칙성 : *을 출력
+		 */
+		System.out.println();
+		
 	}
 
 	}
