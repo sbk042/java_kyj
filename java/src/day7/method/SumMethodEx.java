@@ -1,4 +1,4 @@
-package day7.homework;
+package day7.method;
 
 public class SumMethodEx {
 
