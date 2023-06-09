@@ -30,7 +30,7 @@ public class GCDEx {
 		// 두 정수를 입력받기
 		num1 = sc.nextInt();
     	num2 = sc.nextInt();
-		//반복문 (최대공약수를 구하기 위한 반복분이다) : i가 num1까지
+		//반복문 (최대공약수를 구하기 위한 반복분이다) : i가 1부터 num1까지
 	    while(i <= num1) {
 	    	//num1을 i로 나누었을 때 나머지가 0과 같고 num2를 i로 나누었을 때 나머지가 0
 	    	if(num1 % i == 0 && num2 % i == 0) {
