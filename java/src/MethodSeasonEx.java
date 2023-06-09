@@ -52,7 +52,7 @@ public class MethodSeasonEx {
 	}
 	/** 월이 주어지면 주어진 월에 맞는 계절을 알려주는 메서드
 	 * 매개변수 : 월 => int month
-	 * 리턴타입 : 계절 = > Spring
+	 * 리턴타입 : 계절 = > Spring 
 	 * 메서드명 : getSeason
 	 * */
 	public static String getSeason(int month) {
