@@ -19,13 +19,13 @@ public class MethodMonth {
 		month = sc.nextInt();
 		
 		
+		System.out.println();
 		
 		sc.close();
 
 	}
-	
-	
-	
+
+		
 	/** 월이 주어지면 주어진 월에 맞는 계절을 알려주는 메서드
 	 * 매개변수 : 월 => int month
 	 * 리턴타입 : 계절 = > Spring 
