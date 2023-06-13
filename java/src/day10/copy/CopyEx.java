@@ -41,6 +41,5 @@ class A{
 	//복사 생성자
 	public A(A a) {
 		num1 = a.num1;
-		
 	}
 }
