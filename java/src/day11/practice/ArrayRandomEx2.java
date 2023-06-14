@@ -58,6 +58,7 @@ public class ArrayRandomEx2 {
 		for( i = 0; i<3 ; i++) { //잘 출력되는지 확인
 			System.out.println(arr[i]);
 		}
+		
 		System.out.println("====================");
 		printArray(arr); // 밑에 식 잘 되는지 출력
 		
@@ -72,7 +73,7 @@ public class ArrayRandomEx2 {
 			}
 		}
 		*/
-		createrandomArray(min, max, arr);
+		createRandomArray(min, max, arr);
 		System.out.println("=====================");
 		printArray(arr);
 	}
@@ -125,8 +126,8 @@ public class ArrayRandomEx2 {
 	 */
 	public static void createRandomArray(int min, int max, int arr[]) {
 		//배열이 생성되어 있지 않으면(배열이 null이면) 메서드 종료
-		if(int arr[] == null) {
-		
+		if( arr == null) {
+			return;
 	}
 		//랜덤으로 만들어지는 수의 개수가 배열의 크기보다 작으면 메서드를 종료
 		//ex)1~3 : 3개가 4개짜리 배열에 중복 없이 들어갈 수 없음.
@@ -138,9 +139,11 @@ public class ArrayRandomEx2 {
 			int random = (int)(Math.random()*(max - min + 1) + min);
 			//중복되지 않으면 배열에 저장 후 count 증가
 			if(!contains(arr, random, count)) {
-				
+				arr[count] = random;
+				count++; 
 			}
 			
 	}
 	
+	}
 }
