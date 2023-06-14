@@ -24,6 +24,11 @@ public class BaseballGameEx {
 		 * 3S
 		 * Good!
 		 */
+		
+		int min = 1, max = 9; //랜덤생성 할 최솟값과 최댓값 입력
+		int [] arr = new int [3]; //정수 3개 저장소 만들기
+		int temp;
+		for(int i = 0; i < 3)
 
 	}
 
