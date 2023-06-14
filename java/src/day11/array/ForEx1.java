@@ -5,7 +5,7 @@ public class ForEx1 {
 	public static void main(String[] args) {
 		int arr[] = new int[] {4,5,2,1,9};
 		
-		for(int i = 0; i<arr.length; i++) {
+		for(int i = 0; i<arr.length; i++) { // i는 0부터 arr까지 1씩 증가
 			int tmp = arr[i];
 			System.out.println(tmp);
 		}
@@ -14,7 +14,7 @@ public class ForEx1 {
 			System.out.println(tmp);
 		}
 		//위 와 아래 코드는 같다 하지만 아래 있는 코드가 더 간결하게 보임
-		arr = new int[] {4,5,2,1,9}
+		arr = new int[] {4,5,2,1,9};
 		for(int tmp : arr) {
 			tmp = 0;
 			System.out.println(tmp);

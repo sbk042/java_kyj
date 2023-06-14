@@ -2,6 +2,7 @@ package day11.array;
 
 public class ArrayMethodEx1 {
 
+
 	public static void main(String[] args) {
 		// 메서드의 매개변수와 관련예제.
 		int num1 = 10, num2 = 20;
@@ -75,17 +76,21 @@ public class ArrayMethodEx1 {
 	
 	public static void printArr(int arr[]) {
 		
-		/** 두 배열을 교환하는 메서드2 : 교환이 됨
-		 */
-		public static void swap2(int arr1[], int arr2[]) {
-			int tmp [] = new int [arr1.length];
-			for(int i = 0; i < arr1.length; i++) {
-				tmp[i] = arr1[i];
-				arr1[i] = arr2[i];
-				arr2[i] = tmp[i];
-			}
-			
+	}
+		
+	
+		
+	/** 두 배열을 교환하는 메서드2 : 교환이 됨
+	*/
+	public static void swap2(int arr1[], int arr2[]) {
+		int tmp [] = new int [arr1.length];
+		for(int i = 0; i < arr1.length; i++) {
+			tmp[i] = arr1[i];
+			arr1[i] = arr2[i];
+			arr2[i] = tmp[i];
 		}
+			
+	}
 		
 		
 	/** 두 배열의 교환하는 메서드1 : 교환이 안됨*/
