@@ -29,24 +29,24 @@ public class BaseballGameEx {
 		 * Good!
 		 */
 		
-		int com[] = new int[3]; //랜덤으로 생성 된 수를 저장할 배열 
-		int user[] = new int[3]; // 사용자가 입력한 수를 저장할 배열
+		int com[] = new int[3]; //랜덤으로 생성 된 수를 저장할 배열 (컴퓨터가 랜덤으로 수를 뽑은거라서 com이라고 쓴거임)
+		int user[] = new int[3]; // 사용자가 입력한 수를 저장할 배열 (내가 입력하는 거라서 user)
 		int min = 1, max = 9; // 랜덤 수 최소값 최대값 지정
-		int strike = 0; //스트라이크 개수
-		int ball = 0; //볼의 개수
-		Scanner sc = new Scanner(System.in);
+		int strike = 0; //스트라이크 개수 초기화
+		int ball = 0; //볼의 개수 초기화
+		Scanner sc = new Scanner(System.in); //입력받을 스캐너 생성
 		
 		// 1.) 맞춰야할 숫자 3개를 랜덤으로 생성(중복 X)
-		Array.createRandomArray(min, max, com);
+		Array.createRandomArray(min, max, com);// 랜덤 생성 했었던 class Array파일에서 가져다가 쓴거
 		// Array.printArray(com); // 나중에 주석 처리 할 예정
 		
 		// 반복문
-		do {
-			// 2.) 사용자가 숫자 3개를 입력 받기 (맞추기 게임)
-			System.out.println("user : ");
+		do { // 2.) 사용자가 숫자 3개를 입력 받기 (맞추기 게임)
+			System.out.println("user : "); // 안내문구 출력 사용자가 3개의 수 입력
 			for(int i = 0; i<user.length; i++) {
-				user[i] = sc.nextInt();
+				user[i] = sc.nextInt(); //입력받은 숫자를 user[i]에 저장
 			}
+			
 			// 사용자 입력 체크(만약 사용자가 중복 되게 숫자를 입력했을 때)
 			 if(Array.arrayCheck(user)) {
 				 System.out.println("You must not enter the same number!");
