@@ -1,4 +1,4 @@
-package day12;
+package day12.practice;
 
 /* 한 단어를 관리하는 클래스를 만들거다.
  *  - 단어
