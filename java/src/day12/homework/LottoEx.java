@@ -16,7 +16,15 @@ public class LottoEx {
 		 * user : 1 2 3 4 5 6 
 		 * losing ticket!
 		 */
-
+		int lotto[] = new int[6]; // 로또를 받을 저장소 6개를 생성
+		
+		// 랜덤번호 생성
+		for( int i = 0 ; i < 6; i++) {
+			lotto[i] = (int)(Math.random()*45)+1;
+			
+			//중복 번호 제거
+			for(int j = 0 ; j<i; ) {
+			}
+		}
 	}
-
 }
