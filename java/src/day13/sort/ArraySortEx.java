@@ -11,6 +11,7 @@ public class ArraySortEx {
 		// 버블 정렬 예제
 		int arr[] = {1, 4, 7, 9, 2, 8, 3, 6};
 		
+		
 		for(int i = 0; i<arr.length-1; i++) {
 			for( int j  = 0; j<arr.length-1-i; j++) {
 				if(arr[j] > arr[j+1]){ // <,> 부등호룰 이용해 오룸차순 내림차순을 출력할 수 있다.

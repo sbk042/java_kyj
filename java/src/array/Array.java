@@ -93,7 +93,7 @@ public class Array {
 	 *  리턴타입 : 없음 => void
 	 *  메서드명 : sort
 	 */
-	public static void sor(int arr[]) {
+	public static void sort(int arr[]) {
 		if(arr == null) {
 			return;
 		}
