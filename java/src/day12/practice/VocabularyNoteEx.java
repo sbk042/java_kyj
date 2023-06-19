@@ -2,6 +2,8 @@ package day12.practice;
 
 import java.util.Scanner;
 
+import day13.homework.vo.Word;
+
 public class VocabularyNoteEx {
 
 	public static void main(String[] args) {

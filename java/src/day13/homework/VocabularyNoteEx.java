@@ -4,7 +4,7 @@ public class VocabularyNoteEx {
 
 	public static void main(String[] args) {
 		/* 영어 단어장 프로그램을 구현하세요.
-		 * 
+		 * 이미 만들어 놓은 Word, Vocabulary 사용
 		 * 메뉴
 		 * 1. 단어 추가
 		 * 2. 단어 삭제

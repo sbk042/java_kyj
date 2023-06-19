@@ -1,5 +1,8 @@
 package day12.practice;
 
+import day13.homework.vo.VocabularyNote;
+import day13.homework.vo.Word;
+
 public class VocabularyNoteEx2 {
 
 	public static void main(String[] args) {
