@@ -69,11 +69,14 @@ public class InstancePolymorphismEx {
 		for(HomeAppliances homeAppliance : homeAppliances) {
 			//라디오로 다운캐스팅이 가능한 객체만 끔 => 라디오만 끔
 			if(homeAppliance instanceof Radio) {
-				remocon.turnOff(homeAppliance);
+				remocon.turnOff(homeAppliance); //다운캐스팅이 아님
+				Radio radio = (Radio)homeAppliance; //다운 캐스팅
+				System.out.println(radio.frequency);
 			}
 		}
 	}
 }
+
 class HomeAppliances{
 	boolean power;
 	void turnOn() {

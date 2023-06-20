@@ -103,7 +103,7 @@ class RemoteControl1{
 class TV1 extends HomeAppliances{
 	int channel; //채널이 있음
 	}
-}
+
 
 class AirConditioner1 extends HomeAppliances{
 	double CurrentTemperature; //지금온도
@@ -111,6 +111,5 @@ class AirConditioner1 extends HomeAppliances{
 }
 class Radio1 extends HomeAppliances{
 	double frequency; //라디오 주파수
-	}
-	
 }
+	
