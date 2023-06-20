@@ -1,6 +1,6 @@
 package day14.Inheritance;
 
-import lombok.Data;
+
 
 public class ClassInheritanceEx {
 
@@ -33,6 +33,8 @@ public class ClassInheritanceEx {
 		Phone p2 = new SmartPhone();// 업캐스팅
 		SmartPhone c2 = (SmartPhone)p2;
 		c2.call("123-4567");
+		
+		
 		
 	}
 }

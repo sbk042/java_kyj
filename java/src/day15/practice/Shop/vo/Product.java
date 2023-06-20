@@ -1,6 +1,9 @@
 package day15.practice.Shop.vo;
 
 import lombok.Data;
+import lombok.Getter;
+
+@Getter
 
 @Data //getter setter 만들기
 public class Product {

@@ -14,9 +14,12 @@ public class Ex5 {
 		
 		// i = 0부터 i < 작아야 된다.
 		int arr[] = new int[10];
-		for(int i = 0; i<arr.length; i++) {
+		int i = 0;
+		for(i = 0; i<arr.length; i++) {
 			arr[i] = i;
 		}
+		System.out.println(arr[i]);
+		System.out.println(i);
 
 	}
 

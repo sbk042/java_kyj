@@ -20,10 +20,13 @@ public class Ex6 {
 }
 class A{
 	int num;
+	//public A() {}//추가하거나
 	public A(int num) {
 		this.num = num;
 	}
-	public A() {}//추가하거나
+	//main 메서드
+	A a = new A(10); //10을 입력
 }
-//main 메서드
-A a = new A(10); //10을 입력
+
+
+
