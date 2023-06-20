@@ -111,12 +111,12 @@ public class ShopManager {
 		//제품 리스트에서 입고할 제품명이 있는지 찾는다.(메서드 만들기)
 		//제품 배열에 있는 제품명과 입고할 제품명이 같은지를 
 		// 확인해서 같으면 위치를 기억
-		int index = indexOf(name); //메서드를 이용해 제품명 찾기
+		int index = indexOf(name); //메서드"indexOf"를 이용해 제품명 찾기
 		
 		//있으면 (입고할 제품 수량 만큼 해당 제품에 입고 + )
 		//위치가 0이상이면
 		if(index != -1) { // -1이 아니라면
-			list[index].store(amount); //제품을 찾고 입고
+			list[index].store(amount); //제품을 찾고 입고 수량 입력
 			System.out.println("입고 완료!");
 			return;
 		}
@@ -154,12 +154,12 @@ public class ShopManager {
 	 *  메서드명 : indexOf
 	 */
 	public int indexOf(String name) {
-		for(int i = 0; i < count; i++) { //위에 저장된 제품 개수 까지
-			if( list[i].getName().equals(name)) {
+		for(int i = 0; i < count; i++) { //위에 저장된 제품 개수"count" 보다 작아야된다.
+			if( list[i].getName().equals(name)) { //입력받은 i가 가지고 있는 정보 name에 있다면 i로 출력
 				return i;
 			}
 		}
-		return -1;
+		return -1; //그렇지 않다고 -1를 출력한다.
 	}
 	
 	
