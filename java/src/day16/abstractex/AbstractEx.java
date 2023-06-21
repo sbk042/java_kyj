@@ -42,11 +42,20 @@ public class AbstractEx {
 abstract class A{
 	
 	public abstract void test();
+	// 메서드에 final이 붙으면 메서드 오버라이딩이 불가능하다.
+	public final void test2() {
+		System.out.println("Test2");
+	}
 }
 // 추상 클래스 상속 받는 방법1.
 /* 추상클래스 A를 상속받은 자식 클래스는 추상 클래스로 만들어야함.*/ 
 abstract class ChildA1 extends A{
 	
+	/*
+	public void test2() {
+		
+	}
+	*/
 }
 /** 추상 클래스 상속 받는 방법2
  *  부모 클래스의 추상 메서드를 오버라이딩해서 재정을 해줌
@@ -55,7 +64,7 @@ class ChildA2 extends A{
 
 	@Override
 	public void test() {
-		System.out.println("테스트");
+		System.out.println("test");
 	}
 	
 }

@@ -1,9 +1,12 @@
 package day16.homework.run;
 
+import day15.practice.Shop.controller.ShopManager;
+
 public class Run {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		BeverageMachineEx  beverageMachineEx = new BeverageMachineEx();
+		beverageMachineEx.run();
 
 	}
 
