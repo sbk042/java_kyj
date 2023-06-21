@@ -30,8 +30,8 @@ public class BeverageMachineEx {
 		 */
 	
 	private Scanner sc = new Scanner(System.in); //스캐너를 생성
-	private Product list[] = new Product[];
-	private int count;
+	private Product list[] = new Product[10]; //제품리스트 저장소 10개 설정
+	private int count = 0; //저장된 제품 개수(아직 아무것도 저장이 안됨)
 	
 	public void run() {
 		System.out.println("프로그램 시작!!");
@@ -85,6 +85,26 @@ public class BeverageMachineEx {
 			System.out.println("잘못된 메뉴!");
 
 		}
+	}
+	private void store() {
+		// TODO Auto-generated method stub
+		
+	}
+	private void choice() {
+		//서브메뉴 출력
+		System.out.println("=========");
+		System.out.println("1. 사이다");
+		System.out.println("2. 콜라");
+		System.out.println("3. 환타");
+		System.out.println("음료 선택 : ");
+		int drinkName = sc.nextInt();
+		
+		//제품이 있으면 제품 정보를 출력
+		
+	}
+	private void sell() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
