@@ -9,6 +9,7 @@ public class Run {
 			ShopManager  shopManager = new ShopManager();
 			shopManager.run();
 
+
 	}
 
 }
