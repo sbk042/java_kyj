@@ -1,4 +1,4 @@
-package day15.practice.Shop.controller;
+package day17.practice.controller;
 
 import java.util.Scanner;
 
@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 
-public class ShopManager implements RunInterface {
+public class ShopController implements RunInterface {
 
 	private Scanner sc = new Scanner(System.in); // 밖에 스캐너 생성
 	private Product list[] = new Product[10]; // 제품 리스트 저장소 10개 설정
@@ -19,6 +19,8 @@ public class ShopManager implements RunInterface {
 	private Sales salesHistory[] = new Sales[100]; //판매기록
 	private int salesCount;//기록된 판매수
 	private int totalPrice; //매출 금액
+	
+	private ShopService shopService = new ShopServiceImp();
 	
 	public void run() {
 		System.out.println("프로그램 시작!!");
@@ -64,7 +66,9 @@ public class ShopManager implements RunInterface {
 			//리스트에 추가
 			break;
 		case 2 : //("제품 입고 기능 구현 예정");
-			store();
+			//입고할 제품 정보를 입력받아 제품 객체를 생성
+			//제품 리스트와 제품 수, 입고된 제품을 주고 제품 입고를 관리하라고 시킴
+			shopService.store(list,count, product);
 		
 			break;
 		case 3 : //("제품 조회 기능 구현 예정");

@@ -4,7 +4,7 @@ public class SCEEx {
 
 	public static void main(String[] args) {
 		String str = "abc";
-		//str이 null이 때문에 str.xx으로 되어 있는 모든 곳에서 에러가 발생
+		//str이 null이 아니기 때문에 str.xx으로 되어 있는 모든 곳에서 에러가 발생
 		//그런데 && 연산자 앞에서 null체크하는 코드가 먼저 있기 때문에 null인 경우에
 		//앞 부분이 거짓이 되서 뒷부분인 문제가 되는 코드를 실행하지 않아서 무사히 넘어감(SCE)
 		System.out.println("IS " + str + " equal to abc?" 
