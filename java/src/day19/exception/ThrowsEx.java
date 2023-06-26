@@ -17,9 +17,15 @@ public class ThrowsEx {
 			System.out.println(res);
 		} catch (Exception e) {
 			//System.out.println("Exception : / by zero");
-			System.out.println(e/getMessage);
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
+		System.out.println("EXIT");
 
+	}
+	private static Exception getMessage() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	//try-catch를 이용하여 예외를 직접 처리
 	public static int mod1(int num1, int num2) {
