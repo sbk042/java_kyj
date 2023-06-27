@@ -18,8 +18,6 @@ public class StudentController implements Program{
 	*/
 	private final static int EXIT = 4;
 	private Scanner sc = new Scanner(System.in); // 밖에 private으로 스캐너 생성
-	private int grade, classNum, num;
-	private String name;
 	
 	private ArrayList<Student> list = new ArrayList<>(); //저장소를 list로 가져옴
 	
@@ -31,14 +29,14 @@ public class StudentController implements Program{
 		
 		do {
 			try {
-			//메뉴 출력
-			printMenu();
+				System.out.println(list);
+				//메뉴 출력
+				printMenu();
+				//메뉴 선택(번호로 받기)
+				menu = sc.nextInt();
 			
-			//메뉴 선택(번호로 받기)
-			menu = sc.nextInt();
-			
-			//선택한 메뉴에 따른 기능을 실행
-			runMenu(menu);
+				//선택한 메뉴에 따른 기능을 실행
+				runMenu(menu);
 			}catch(InputMismatchException e){
 				menu = EXIT-1; //종료 메뉴가 아닌 아무 메뉴를 추가
 				sc.nextLine(); //앞에서 잘못 입력한 내용을 비워준다.
@@ -46,8 +44,7 @@ public class StudentController implements Program{
 			}
 			
 		}while( menu != EXIT );
-		System.out.println("Program exit!");
-		sc.close();
+
 	}
 	@Override
 	public void printMenu() {
@@ -127,13 +124,14 @@ public class StudentController implements Program{
 			return; //종료
 		}
 		//수정될 학생 정보를 입력(학년, 반, 번호, 이름)
-		//수정 할 학생정보 입력(학년, 반, 번호)
 		System.out.print("input grade : ");
 		grade = sc.nextInt();
 		System.out.print("input class : ");
 		classNum = sc.nextInt();
 		System.out.print("input number : ");
 		number = sc.nextInt();
+		System.out.println("input name : ");
+		String name = sc.nextLine();
 		
 		//학생 정보를 수정
 		//수정될 학생 정보가 이미 있는 학생인지 확인
