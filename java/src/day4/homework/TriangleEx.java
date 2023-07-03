@@ -42,8 +42,9 @@ public class TriangleEx {
 		}
 		sc.close();
 		
-		//강사님 버전
 		
+	/*
+		//강사님 버전
 		int a, b, c;
 		int max; // 세변 a, b, c중 가장 큰 변의 길이
 		Scanner sc = new Scanner(System.in);
@@ -86,9 +87,8 @@ public class TriangleEx {
 		else {
 			System.out.println("Unable to create triangle.");
 		}
-		
 		sc.close();
-
+*/
 	}
 
 }

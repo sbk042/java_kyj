@@ -26,8 +26,8 @@ public class ScoreAverageEx {
 		//닫기
 		sc.close();
 		
+		/*
 		// 강사님 버전
-		
 		int kor, eng, math;
 		double avg;
 		Scanner sc =new Scanner(System.in);
@@ -44,7 +44,7 @@ public class ScoreAverageEx {
 		System.out.println("avg : " + avg);
 		
 		sc.close();
-
+*/
 	}
 
 }
