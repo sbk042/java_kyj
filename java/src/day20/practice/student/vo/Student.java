@@ -31,6 +31,7 @@ public class Student{
 		this.num = number;
 		this.name = name;
 	}
+
 }
 
 
