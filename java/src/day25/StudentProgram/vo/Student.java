@@ -5,7 +5,9 @@ public class Student{ //학생을 관리하는 클래스
 
 	private String num, name, major;
 	//난 Data잘 모르겠다 
-	// 우클릭 -> 소스 -> getter,setter클릭
+	// 우클릭 -> 소스 -> getter,setter 클릭
+	// 우클릭 -> 소스 -> toString 클릭
+	
 	public Student(String num, String name, String major) {
 		this.num = num;
 		this.name = name;
@@ -23,7 +25,6 @@ public class Student{ //학생을 관리하는 클래스
 	public String getNum() {
 		return num;
 	}
-
 
 	public void setNum(String num) {
 		this.num = num;

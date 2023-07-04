@@ -18,7 +18,7 @@ public class StudentController2  {
 	public void run() {
 		Scanner sc = new Scanner(System.in);
 		int menu;
-		List<Student> list = new ArrayList<Student>();
+		List<Student> list = new ArrayList<Student>(); //student라는 ArrayList를 생성 즉 리스트를 생성
 		do { //반복한다 언제까지?
 			System.out.println("=========");
 			//1. 메뉴 출력
@@ -62,6 +62,7 @@ public class StudentController2  {
 		String num, name, major; //학번, 이름, 과 String으로 선언
 		
 		Student tmp;
+		
 		//학번(문자열, 공백이 없는)
 		System.out.println("학번 : ");
 		num = sc.next();
@@ -79,7 +80,7 @@ public class StudentController2  {
 		list.add(tmp);
 	}
 
-	private void print(List<Student> list) {
+	private void print(List<Student> list) {//student리스트를 매개변수로 받고
 		for(Student tmp2 : list) {
 			System.out.println(tmp2);
 		}
