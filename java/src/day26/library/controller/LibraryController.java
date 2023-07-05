@@ -118,7 +118,32 @@ public class LibraryController {
 
 	private void returnBook() { //도서 반납하기
 		
+		//반납할 도서 번호 입력하기
+		sc.nextLine();//이전 엔터 받기
+		System.out.println("도서 번호 : ");
+		String num = sc.nextLine();
 		
+		//반납된 책을 리스트에 저장해야한다.
+		//책이 bookList에 있는지 없는지 확인
+		boolean possible 
+		= bookList
+			.stream()
+			.filter(b->!b.isLoan()&&b.getNum().equals(num))
+			.count() > 0;
+		//리스트에 저장하기 위해서는 객체를 생성
+		//만약 없다면 등록
+		if(!possible) {
+			
+		}
+		int index = bookList.indexOf(new Book(num,null,null,null)); //도서번호만 같으면 되므로 나머지는 null로 비워준다.
+		Date loanDate = new Date(); //객체 생성
+		LoanBrowsing lb 
+			= new LoanBrowsing( bookList.get(index), loanDate, 14); //대출기간 14일로 지정
+		//대출열람 리스트에 추가 위에 private List<LoanBrowsing> loanList = new ArrayList();
+		loanList.add(lb);
+		bookList.get(index).loanBook(); //도서에 대출했다고 수정해줘야함
+		//대출일을 출력해준다(해당 날짜)
+		System.out.println("대출일 : " + lb.getLoanDateStr());
 	}
 
 	private void loanBook() { //도서 대출받기
@@ -165,10 +190,10 @@ public class LibraryController {
 			System.out.println("대출할 수 없습니다.");
 			return;
 		}
-		//오바르면 대출을 진행
-		//도서 대출 객체를 생성해야한다.(도서, 대출일.대출기간 )필요
-		int index = bookList.indexOf(new Book(num,null,null,null)); //도서번호만 같으면 되므로
-		Date loanDate = new Date();
+		//올바르면 대출을 진행
+		//도서 대출 객체를 생성해야한다.(도서, 대출일, 대출기간)필요
+		int index = bookList.indexOf(new Book(num,null,null,null)); //도서번호만 같으면 되므로 나머지는 null로 비워준다.
+		Date loanDate = new Date(); //객체 생성
 		LoanBrowsing lb 
 			= new LoanBrowsing( bookList.get(index), loanDate, 14); //대출기간 14일로 지정
 		//대출열람 리스트에 추가 위에 private List<LoanBrowsing> loanList = new ArrayList();
@@ -177,7 +202,6 @@ public class LibraryController {
 		//대출일을 출력해준다(해당 날짜)
 		System.out.println("대출일 : " + lb.getLoanDateStr());
 		//반납예정일도 출력
-		
 	}
 
 	private void insertBook() { //도서 등록하기
@@ -200,7 +224,7 @@ public class LibraryController {
 		bookList.add(book);
 		
 		//잘 등록했는지 확인하기 위해 출력해보기(나중에 주석처리)
-		System.out.println(bookList);
+		//System.out.println(bookList);
 	}
 
 	private void printMenu() {
