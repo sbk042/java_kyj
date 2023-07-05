@@ -1,8 +1,13 @@
 package day25.StudentProgram.vo;
 
-public class Student{ //학생을 관리하는 클래스
+import java.io.Serializable;
+
+public class Student implements Serializable{ //학생을 관리하는 클래스
 //한 학생을 관리하는 것
 
+	// implements Serializable코드를 추가하면 Student 노란색줄이 있는데 커서를 갖다대면
+	// 두번째 시리얼 ID클릭해서 밑에 있는 코드를 추가해야 한다.
+	private static final long serialVersionUID = 8283857468842193979L;
 	private String num, name, major;
 	//난 Data잘 모르겠다 
 	// 우클릭 -> 소스 -> getter,setter 클릭
