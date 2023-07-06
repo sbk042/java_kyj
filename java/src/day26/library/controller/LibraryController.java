@@ -226,7 +226,6 @@ public class LibraryController {
 		//잘 등록했는지 확인하기 위해 출력해보기(나중에 주석처리)
 		//System.out.println(bookList);
 	}
-
 	private void printMenu() {
 		System.out.println("Menu");
 		System.out.println("1. 도서 등록");
@@ -235,6 +234,5 @@ public class LibraryController {
 		System.out.println("4. 프로그램 종료");
 		System.out.println("Select Menu : ");
 	}
-
 }
 			
