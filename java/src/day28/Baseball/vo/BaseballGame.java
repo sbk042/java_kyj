@@ -15,6 +15,7 @@ public class BaseballGame {
 	public BaseballGame() { //생성자 만들기
 		com = new ArrayList<>();
 		user = new ArrayList<>();
+		com.clear();
 		generate(3, 1, 9);
 	}
 	
@@ -39,7 +40,6 @@ public class BaseballGame {
 			set.add(random.nextInt(max - min + 1) + min);
 		}
 		//중복되지 않게 처리된 set을 List에 저장해준다.
-		com.clear();
 		com.addAll(set);
 		//리스트를 섞어줌.
 		Collections.shuffle(com); //shuffle로 인해 알아서 섞어준다.

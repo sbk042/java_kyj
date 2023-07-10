@@ -30,7 +30,7 @@ public class GameController {
 		do {
 			printMenu();
 			menu = sc.nextInt();
-			runMenu();
+			runMenu(menu);
 		}while( menu != 3);
 		save(fileName);
 	}
