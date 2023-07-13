@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=`, initial-scale=1.0">
+	<title>삼분할 예제</title>
+	<style>
+/* 1.) 컨테이너로 먼저 바탕 네모를 만들어준다.  */
+.container{
+	 width: 500px; height: 500px; 
+	 background-color: pink; 
+	 padding 10px;
+	 box-sizing: border-box;
+	}
+/* 2.) 컨테이너 박스에 ::after 적용  */
+.container::after{
+	content: ''; display: block; clear: both;
+}
+/* 3.) 안에 들어갈 박스들 기본 설정하기 */
+.box{
+	/* 부모 박스 컨테이너의 100%에서 가운데 공백들인 10px 10px을 빼주고 3으로 나누기 3 */
+	width: calc((100% - 2 * 10px) / 3);
+	/* 세로 길이 500px에서 위 아래는 이미 부모 컨테이너에서 10px을 빼줬기 때문에 연산이 필요가 없다. */
+	height: 100%;
+	/* 색 지정 */
+	background-color: yellow;
+	/* 왼쪽으로 정렬 */
+	float: left;
+}
+/* 4.) 나머지 박스 정리 */
+.box+.box{
+	/* 박스 다음 박스가 오는 경우 마진을 10px 넣어준다. */
+	margin-left: 10px;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box box1"></div>
+		<div class="box box2"></div>
+		<div class="box box3"></div>
+	</div>
+</body>
+</html>
