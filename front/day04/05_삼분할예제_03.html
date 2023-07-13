@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>삼분할예제_03</title>
+	<style>
+/*  1.) 컨테이너 생성 설정 해주기 */
+.container{
+	width: 500px; height: 500px;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: black;
+}
+.box{
+	width: calc((100% - 10px) / 2);
+	height: 100%;
+	background-color: yellow;
+	float: left;
+}
+.box2{
+	height: calc((100% - 10px) / 2);
+	background-color: red;
+	float: right;
+}
+.box3{
+	height: calc((100% - 10px) / 2);
+	margin-top: 10px;
+	float: right;
+	background-color: blue;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box box1"></div>
+		<div class="box box2"></div>
+		<div class="box box3"></div>
+	</div>
+</body>
+</html>
