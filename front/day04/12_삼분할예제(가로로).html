@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>가로로 삼분할예제</title>
+	<style>
+		.container{
+			width: 300px;
+			background-color: yellow;
+			padding: 10px;
+		}
+		.box{
+			height: 50px;
+			background-color: green;
+		}
+		.box.box{
+			margin-top: 10px;
+		}
+
+		.container2{
+			height: 50px;
+			width: 50px;
+			background-color: green;
+			margin-left: 10px;
+			float: right;
+		}
+		.bar{
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box"></div>
+		<div class="box"></div>
+		<div class="box"></div>
+	</div>
+	<div class="bar"></div>
+	<div class="container2">
+		<div class="box2">1</div>
+		<div class="box2">2</div>
+		<div class="box2">3</div>
+	</div>
+</body>
+</html>
