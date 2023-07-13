@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>버튼예제(강사님버전)</title>
+	<style>
+		.container{
+			width: 300px;
+			height: 50px;
+			/* block태그를 가운데다 맞추기 = margin이용하기 */
+			margin: 0 auto;
+			
+		}
+		.btn{
+			width: 50px;
+			height: 50px;
+			background-color: #fff;
+			float: left;
+			border-radius: 50%;
+			/* 폰트 사이즈 */
+			font-size: 30px;
+			/* 텍스트 중앙에 위치 */
+			text-align: center;
+			line-height: 40px;
+			text-decoration: none;
+			color: #000;
+			/* border는 요소가 변할 수 있지만 box-shadow는 요소가 변할 수 없다. */
+			box-shadow: 0 0 1px 1px rgba(0,0,0,0.1);
+		}
+		.contents{
+			width: 200px;
+			height: 50px;
+			float: left;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+		.inner-contents{
+			width: 100%;
+			height: 50px;
+			background-color: yellow;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<a href="#" class="btn btn-prev"><</a>
+		<div class="contents">
+			<div class="inner-contents"></div>
+		</div>
+		<a href="#" class="btn btn-next">></a>
+		</div>
+	</div>
+</body>
+</html>
