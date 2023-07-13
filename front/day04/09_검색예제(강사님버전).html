@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>검색창 만들기 예제(강사님버전)</title>
+	<style>
+.container{
+ width: 500px; height: 50px; 
+ box-sizing: border-box;
+ border: 2px solid green;
+ border-radius: 25px;
+ padding: 5px;
+ position: relative;
+ padding-left: 15px;
+}
+.input-search{
+	width: 400px;
+	height: 100%;
+	box-sizing: border-box;
+	/* 테두리 스타일을 0으로 맞춰준다. */
+	border: none;
+	/* 클릭을 했을 때 뜨는 박스 */
+	outline: none;
+}
+.btn-search{
+	width: 50px;
+	height: 50px;
+	background-color: green;
+	position: absolute;
+	/* 테두리 픽셀만큼 맞춰주기(밀어주기) */
+	top: -2px; right: -2px;
+	/* 테두리를 0px로 맞춰준다. */
+	border: 0;
+	border-radius: 0 25px 25px 0;
+}
+	</style>
+</head>
+<body>
+	<form class="container">
+		<input type="text" class="input-search">
+		<button class="btn-search"></button>
+	</form>
+</body>
+</html>
