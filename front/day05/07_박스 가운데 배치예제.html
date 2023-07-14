@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>박스 가운데 배치</title>
+	<style>
+.container{
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	border: 3px solid black;
+}
+/* 1.) */
+.box1{
+	width: 300px; height: 300px; background-color: red;
+	/* 좌우 가운데 만들기 */
+	margin: 0 auto;
+	/* 위 아래 가운데 만들기 */
+	/* 부모를 기준으로 50프로 내린 뒤 */
+	/* 부모만큼 내린 뒤 25% 다시 올려주면 가운데로 설정이 된다. */
+	margin-top: calc(50% - 150px);
+}
+/* 
+margin에서 %는 부모 요소의 width의 %. height는 상관없음
+*/
+/* 2.) */
+.box{
+	width: 300px; height: 300px; background-color: red;
+	top: 50%; left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	position: absolute;
+}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box"></div>
+	</div>
+</body>
+</html>
