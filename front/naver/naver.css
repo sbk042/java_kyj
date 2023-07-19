@@ -550,15 +550,35 @@
 		/* 화살표 만들기 끝! */
 
 		/* 3번째 컨텐츠 영역 */
+		/* 여기부터 해본거 */
 		#container .box-left .box-shopping .box-shopping-body{
 			padding: 19px 20px 0;
 		}
+		
+		#container .box-left .box-shopping .box-shopping-body .tab-list2{
+			font-size: 1.4rem ; line-height:1.7rem ;
+			letter-spacing: -.4px; /*글자 간격*/
+		}
+		#container .box-left .box-shopping .box-shopping-body .tab-item2{
+			float: left; position: relative;
+			font-size: 1.6rem; line-height: 23px;
+			font-weight: 800; /*bold보다 살짝 더 두꺼움*/
+			cursor: pointer; color: rgba(8, 8, 8, .5);
+			vertical-align: top;
+		}
+		#container .box-left .box-shopping .box-shopping-body .tab-item2+.tab-item2{
+			padding-left: 26px;
+		}
+
 		#container .box-left .box-shopping .box-shopping-page{
 			border-top: 1px solid #ebebeb ;
 		}
 		#container .box-left .page-container.box-shopping-page .box-page .box-title .text-point{
 			color: #9858f5;
 		}
+
+		/* 여기까지내가 해본거 */
+		
 		/* 컨텐츠 오른쪽 영역  */
 		#container .box-right{
 			float: right; width: 420px;
