@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>반응형메뉴예제</title>
+	<style>
+		/* 
+		브라우저 크기가 900px이상아면 좌우로 삼분할
+		900px 미만이면 세로로 삼분할
+		 */
+		 nav{
+			position: relative;
+		 }
+		.list-menu{
+			border: 3px solid black; list-style: none; /*텍스트 앞에 점 없애기*/
+			padding: 0; margin: 0;
+		}
+		.list-menu::after{ /*밑에 float : left를 했으므로*/
+			content: ''; display: block; clear: both;
+		}
+		.item-menu{
+			float: left; width: 33.33%;
+		}
+		.item-menu+.item-menu{
+			border-left: 3px solid black ; margin-left: -3px; /*margin-left를 하지 않으면 밀려서 밑으로 내려간다.*/
+		}
+		.link-menu{ /*display : block 공부해오기 아직 이해 부족*/
+			display: block; height: 50px; text-align: center; line-height: 50px; font-size: 20px;
+			color: black; text-decoration: none; /*밑줄 없애기*/
+		}
+		
+		#ham{display: none;}
+		 @media screen and (max-width:900px) {
+			.list-menu{
+				position: absolute; top: 0; right: 0;
+			}
+			.item-menu{
+				width: 400px; float: none;
+			}
+			.item-menu+.item-menu{
+				border-left: 0; border-top: 3px solid black; margin-left: 0;
+			}
+		 }
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="list-menu">
+			<li class="item-menu">
+				<a href="#" class="link-menu">메뉴1</a>
+			</li>
+			<li class="item-menu">
+				<a href="#" class="link-menu">메뉴2</a>
+			</li>
+			<li class="item-menu">
+				<a href="#" class="link-menu">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+</body>
+</html>
