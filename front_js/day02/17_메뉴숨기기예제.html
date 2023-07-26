@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴숨기기 예제</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		.box{
+			width: 200px; height: 100px; background-color: pink;
+		}
+	</style>
+</head>
+<body>
+	<button class="btn-close">접기</button>
+	<div class="box"></div>
+
+	<script>
+		$(".btn-close").click(function(){
+			const FOLD = '접기';
+			const UNFOLD = '펼치기';
+			$(".box").toggle();
+			//현재 글자를 가져옴 : text(), this
+			let text = $(this).text();
+
+			//가져온 글자가 FOLD와 같으면 UNFOLD로, 다르면 FOLD로
+			//클릭 이벤트가 발생한 요소에 글자를 수정해준다.
+			/*if(text == FOLD){
+				text = UNFOLD;
+			}else{
+				text = FOLD;
+			}*/
+			//위에 조건문 한 줄로 쓰기
+			text = text == FOLD ? UNFOLD : FOLD;
+			$(this).text(text);
+		});
+
+	</script>
+</body>
+</html>
