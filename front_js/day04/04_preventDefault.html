@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>preventDefaul</title>
+	<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<div style="height : 1000px"></div>
+	<!-- a태그 링크를 클릭하면 위로 올라가버린다. -->
+	<a href="#">링크</a>
+	<script>
+		$('a').click(function(){
+			//태그의 기본 기능을 막아준다.
+			e.preventDefault();
+		});
+	</script>
+</body>
+</html>
