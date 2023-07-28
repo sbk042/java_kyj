@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>숨겨진 사이드 메뉴바 만들기 예제</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		/* 숨겨진 바를 오른쪽으로 보내기 위해 nav를 relative로 잡음 */
+		 nav{ position: relative; height: 50px;}
+		.btn-menu{
+			width: 50px; height: 50px; background-color: pink; border: 0;
+			position: absolute; right: 5px; top: 5px;
+			font-size: 15px; cursor: pointer;
+		}
+		.list-menu{
+			width: 200px; height: 500px; border: 1px solid black;
+			background-color: aqua;
+			/* 화면을 밖으로 내보내기 위해 right를 -를 붙였고 
+			width 200 + 테두리 1px + 1px로 해서 -202px을 넣었다 */
+			 position: fixed; top: 58px; right: -202px; /*페이지에서 아예 안 보이게 하기 위해 fixed*/
+			 list-style: none; padding: 0; margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<button class="btn-menu">메뉴</button>
+		<ul class="list-menu"></ul>
+	</nav>
+	<script>
+		// 오른쪽에 있으면 true 왼쪽으로 가면 false
+		let fold = true; //전역변수
+		$('.btn-menu').click(function(){
+			// 요소가 애니메이션중이면 동작하지 않게 하는 코드임
+			if($('.list-menu').is(':animated')){
+				return;
+			}
+			let right = $('.list-menu').css('right');
+			/*
+			Number(문자열) vs parseInt(문자열)
+			- 공통점 : 문자열을 숫자로 변환
+			- 차이점 : 
+					- Number()는 숫자로 바꿀 수 없는 문자가 있는 경우 NaN이 됨.
+					- parseInt()는 숫자로 바꿀 수 없는 문자가 나타나기전까지 숫자를 바꾼다.
+			*/
+			right = parseInt(right);
+
+			if(/*fold*/ right != 0){
+			//나타나게 하는 코드
+			$('.list-menu').animate({right : 0}, 1000); /*오른쪽으로 1초동안 이동*/
+			}else{
+			//들어가게 하는 코드
+			$('.list-menu').animate({right : '-202px'}, 1000);
+			}
+			fold = !fold;
+		});
+	</script>
+</body>
+</html>
