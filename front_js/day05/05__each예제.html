@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>each예제</title>
+	<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<ul>
+		<li>항목1</li>
+		<li>항목2</li>
+		<li>항목3</li>
+	</ul>
+	<button class="btn">버튼1</button>
+	<button class="btn">버튼2</button>
+	<button class="btn">버튼3</button>
+	<script>
+		// each : 해당하는 요소를 하나씩 꺼내서 사용
+		/*
+		$('.btn').each((index, element)=>{
+			$(element).click(function(){
+				$('li').css('background-color','white');
+				$('li').eq(index).css('background-color','pink');
+			});
+		});
+		*/
+		$('.btn').each(function(index/*element (생략가능)*/){
+			//this : each에 의해 꺼내진 요소. each에 의해서 꺼내진 .btn요소
+			$(this).click(function(){
+				$('li').css('background-color','white');
+				$('li').eq(index).css('background-color','pink');
+			});
+		});
+	</script>
+</body>
+</html>
