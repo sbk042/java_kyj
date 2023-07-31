@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>1.안녕하세요 알림창 만들기</title>
+	<!-- !jquery연결 꼭 해주기! -->
+	<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<!-- 1.) 먼저 버튼 만들기 -->
+	<button class="btn">클릭</button>
+
+	<!-- 2.) scrpit창 만들기 -->
+	<script>
+		// 3.) 버튼 기능 구현하기(이벤트 등록하기 click이벤트)
+		$('.btn').click(function(){
+			alert("안녕하세요.");
+		});
+
+		/*
+		실행문이 한 줄인 경우 {}괄호를 생략할 수 있다.
+		$('.btn').click(()=>alert('안녕하세요.'));
+		*/
+	</script>
+	
+</body>
+</html>
