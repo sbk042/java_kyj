@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>버튼을 클릭하면 그거에 맞는 메뉴 나타나기</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		.box { width: 500px; height: 300px; }
+		.box1, .btn1{ background-color: aqua; }
+		.box2, .btn2{background-color: pink; }
+	</style>
+</head>
+<body>
+	<button class="btn1">버튼1</button>
+	<button class="btn2">버튼2</button>
+	<div class="container">
+	<div class="box box1"></div>
+	<div class="box box2"></div>
+</div>
+<script>
+	$('.box').hide();
+
+	$('.btn1').click(()=>{
+		$('.box').hide();
+		$('.box1').show();
+	});
+	$('.btn2').click(()=>{
+		$('.box').hide();
+		$('.box2').show();
+	});
+</script>
+</body>
+</html>
