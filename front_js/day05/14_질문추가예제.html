@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>버튼을 누르면 질문이 추가되는 예제</title>
+	<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<button class="btn-question">질문 추가</button> <br>
+	<div class="box">
+		<div class="inner-box">
+			<input type="text" class="input" placeholder="질문"> <br>
+			<textarea placeholder="답변" cols="30" rows="10"></textarea>
+		</div>
+	</div>
+	<button class="btn-add-question">질문등록</button>
+	<script>
+		$('.btn-question').click(function(){
+			let element =
+			//inner-box 복사하여 넣기 
+			`<div class="inner-box">
+			<input type="text" class="input" placeholder="질문"> <br>
+			<textarea placeholder="답변" cols="30" rows="10"></textarea>
+		</div>`;
+		//박스에 element를 추가한다.
+		$('.box').append(element);
+		});
+	</script>
+</body>
+</html>
