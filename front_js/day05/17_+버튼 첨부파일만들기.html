@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>+버튼에 첨부파일 미리보기 기능 넣기</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		.input-file{
+			display: none; /*처음에 안 보이게 만듬*/
+		}
+		.btn-file{
+			border: 2px solid red;
+			width: 100px; height: 100px; font-weight: bold;
+			font-size: 30px; line-height: 100px; text-align: center;
+			display: block; text-decoration: none; color: red;
+		}
+	</style>
+</head>
+<body>
+	<input type="file" name="file" class="input-file">
+	<a href="#" class="btn-file">+</a>
+	<script>
+		$('.btn-file').click(function(){
+			//버튼을 클릭하면 첨부파일이 나오는 걸 원한다.
+			//버튼을 클릭하면 첨부파일 버튼을 대신 클릭하면 된다.
+			$('.input-file').click();
+		});
+	</script>
+</body>
+</html>
