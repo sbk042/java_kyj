@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>버튼 클릭시 배경색 바꾸기(복습2)</title>
+	<!-- jquery 꼭 연결시키기! -->
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		ul{
+			list-style: none; /*li태그 앞에 있는 점 없애주기*/
+		}
+	</style>
+</head>
+<body>
+	<ul>
+		<li>항목1</li>
+		<li>항목2</li>
+		<li>항목3</li>
+	</ul>
+	<button class="btn btn1">항목1 클릭</button>
+	<button class="btn btn2">항목2 클릭</button>
+	<button class="btn btn3">항목3 클릭</button>
+	<script>
+		/*
+		$('.btn1').click(()=>{
+			// 모든 li태그에 흰색으로 지정해준다음
+			$('li').css('background-color','white');
+			// 원하는 li 태그에 색을 지정해준다.
+			$('li').eq(0).css('background-color','yellow');
+		});
+		$('.btn2').click(()=>{
+			$('li').css('background-color','white');
+			$('li').eq(1).css('background-color','pink');
+		});
+		$('.btn3').click(()=>{
+			$('li').css('background-color','white');
+			$('li').eq(2).css('background-color','aqua');
+		});
+	*/
+	$('.btn').click(function(){ //this를 써야 하므로 function함수를 사용
+		$('li').css('background-color','white');
+		//현재 내가 눌린 버튼이 .btn중 몇번째인지 가져온다. index로 가져온다.
+		let index = $(this).index()-1; //0번째 1번째 이므로 -1를 해준다. 
+		$('li').eq(index).css('background-color','pink');
+	});
+		</script>
+</body>
+</html>
