@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>리스트 클릭 예제(a태그 이용하기)</title>
+	<script src="../js/jquery.min.js"></script>
+	<style>
+		.bg-yellow{ background-color: yellow;}
+		.bg-orange{ background-color: orange;}
+	</style>
+</head>
+<body>
+	<ul>
+		<li><a href="#">항목1</a></li>
+		<li><a href="#">항목2</a></li>
+		<li><a href="#">항목3</a></li>
+		<li><a href="#">항목4</a></li>
+		<li><a href="#">항목5</a></li>
+		<li><a href="#">항목6</a></li>
+		<li><a href="#">항목7</a></li>
+	</ul>
+	<script>
+		$('a').click(function(){
+			//1.) 모든 li태그에 배경이 흰색이 되도록 처리해줘야한다.
+			$('li').removeClass('bg-yellow bg-orange');
+			//2.) 현재 선택한 a태그의 부모 요소에 배경이 노락색이 되도록 처리한다.
+			$(this).parent().addClass('bg-yellow');
+			//3.) 현재 선택한 a태그의 부모 요소 앞에 있는 요소의 배경이 주황색이 되도록 처리한다.
+			$(this).parent().prev().addClass('bg-orange');
+			//4.) 현재 선택한 a태그 부모 요소 뒤에 있는 요소의 배경이 주황색이 되도록 처리한다.
+			$(this).parent().next().addClass('bg-orange');
+		});
+</script>
+</body>
+</html>
