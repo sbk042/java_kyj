@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>버튼을 누르면 input창이 추가되는 예제</title>
+	<script src="../js/jquery.min.js"></script>
+</head>
+<body>
+	<button class="btn-add">추가</button> <br>
+	<div class="box"></div>
+	<script>
+		/*
+		 방법 1.) append를 이용
+		$('.btn-add').click(function(){
+			//input태그를 추가
+			let input = `<input type ="text"><br>`
+			//box다음에 input 태그를 추가
+			$('.box').append(input);
+		});
+		*/
+		/*
+		 방법2.) after이용
+		$('.btn-add').click(function(){
+			let input = `<br><input type = text>`;
+			$(this).after(input);
+		});
+		*/
+		/*
+		 방법3.) before 이용
+		$('.btn-add').click(function(){
+			let input = `<br><input type = text>`;
+			// .box태그 오기 전 (앞에) 붙여준다.
+			$('.box').before(input);
+		});
+		*/
+		// html 이용
+		$('.btn-add').click(function(){
+			let input = `<br><input type = text>`;
+			//코드(html)를 그대로 가져와서
+			let html = $('.box').html();
+			// 그 코드 뒤에 input태그를 붙여준다.
+			$('.box').html(input);
+		});
+	</script>
+</body>
+</html>
