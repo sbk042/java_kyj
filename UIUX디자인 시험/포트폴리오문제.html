@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>UI 디자인(포트폴리오)</title>
+	<style>
+		.box{ width: 100%; border: 1px solid gray; opacity: 50%;}
+		.btn{margin-top: 10px; margin-left: 130px;}
+		.title{margin-bottom: 3px;}
+		.file{margin-top: 3px;}
+		
+	</style>
+</head>
+<body>
+	<form action="">
+		<h1>포트폴리오 문제</h1>
+		<h5></h5>
+		<div class="box"></div>
+		<h5>*하단의 화면처럼 공지사항 작성하기 폼을 작성하시오. (form의 action속성값은 "insert.no"부여. method속성값은 "post"부여)</h5>
+			<fieldset>
+				<legend>공지사항 작성하기</legend>
+					<label>
+						&nbsp;&nbsp;&nbsp;제목&nbsp;&nbsp;&nbsp;
+						<input type="text" name="title" placeholder="제목을 입력하시요." class="title">
+					</label>
+					<br>
+					<label>
+						&nbsp;&nbsp;&nbsp;내용&nbsp;&nbsp;&nbsp;
+						<input type="text" name="content" placeholder="내용을 입력하시오." style="height: 100px;">
+					</label>
+					<br>
+					<label>
+						첨부파일
+						<input type="file" name="uploadFile" class="file">
+					</label>
+					<br>
+					<button class="btn">작성하기</button>
+			</fieldset><br>
+		<div class="box"></div><br>
+	</form>
+	<table border="1" width = "100%">
+	<thead style="color: white; background-color: coral;">
+		<th>번호</th>
+		<th colspan="2">제목</th>
+		<th>작성자</th>
+		<th>작성일</th>
+		<th>조회수</th>
+	</thead>
+		<tr style="background-color:lemonchiffon;">
+			<td>9</td>
+			<td>공지사항 제목9</td>
+			<td style="background-color:lavender;"  align="center" width ="70px">바로가기</td>
+			<td>user01</td>
+			<td>2021-03-29</td>
+			<td>34</td>
+		</tr>
+		<tr style="background-color:lemonchiffon;">
+			<td>6</td>
+			<td>공지사항 제목6</td>
+			<td style="background-color:lavender;" align="center">바로가기</td>
+			<td>answ445</td>
+			<td>2021-03-12</td>
+			<td>67</td>
+		</tr>
+		<tr style="background-color:lemonchiffon;">
+			<td>3</td>
+			<td>공지사항 제목3</td>
+			<td style="background-color:lavender;"  align="center">바로가기</td>
+			<td>testg12</td>
+			<td>2021-03-01</td>
+			<td>98</td>
+		</tr>
+		<tr style="background-color:lemonchiffon;">
+			<td>2</td>
+			<td>공지사항 제목2</td>
+			<td style="background-color:lavender;"  align="center">바로가기</td>
+			<td>palwe3</td>
+			<td>2021-01-02</td>
+			<td>85</td>
+		</tr>
+		<tr style="background-color:lemonchiffon;">
+			<td>1</td>
+			<td>공지사항 제목1</td>
+			<td style="background-color:lavender;"  align="center">바로가기</td>
+			<td>xm123</td>
+			<td>2020-12-24</td>
+			<td>124</td>
+		</tr>
+		<tr style="color: white; background-color:coral;">
+			<td align="center" colspan="4">전체공지사항 갯수</td>
+			<td align="center" colspan="2">5개</td>
+		</tr>
+	</table>
+</body>
+</html>

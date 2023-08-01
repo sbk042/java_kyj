@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>회원가입 페이지 만들기</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+	<script src="../front_js/js/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"></script>
+	<style>
+		.container{
+			width: 700px; height: 550px; border: 1px solid cornflowerblue; background-color:aliceblue;
+			position: relative;
+		}
+		.box-join{
+			width: 380px; height: 450px; background-color:whitesmoke; border: 1px solid lightgray;
+			position: absolute; left: 25%; top: 10%;
+		}
+		.manage{
+			margin-left: 30px; margin-top: 15%;
+		}
+		.error-pw{ 
+		 color: gray; font-size: 10px; margin-left: 80px; margin-top: 20px;
+		}
+		.error-id{
+			color: red; font-size: 10px; margin-left: 100px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="box-join">
+			<form action="" class="manage">
+				<div class="form-group">
+					아이디 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" class="id" name="id" 
+					style="border: none; border-bottom: 3px dotted black; background-color:transparent;">
+				</div>
+				<p class="error-id">필수입력 항복입니다.</p>
+				<div class="form-group">
+					패스워드&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="password" class="pw" name="pw"
+					style="border: none; border-bottom: 3px dotted black; background-color:transparent;">
+				</div>
+				<p class="error-pw">영문과 대/소문자 특수문자, 숫자 포함 8 ~ 32자</p>
+				<div class="form-group">
+					패스워드 확인<input type="password" class="pw2" name="pw2"
+					style="border: none; border-bottom: 3px dotted black; background-color:transparent;">
+				</div>
+				<div class="error-pw1"></div>
+				<div class="form-group">
+					이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" class="email" name="email"
+					style="border: none; border-bottom: 3px dotted black; background-color:transparent;">
+				</div>
+				<div class="form-group">
+					주소&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" class="address" name="address"
+					style="border: none; border-bottom: 3px dotted black; background-color:transparent;">
+				</div>
+				<button class="btn btn-success col-11" style="top: 35px; 
+				background-color:lightgreen; border: none; color: darkgreen;">가 입</button>
+			</form>
+		</div>
+	</div>
+		</div>
+		<script>
+			$('.error-pw').hide();
+			$('.pw').click(function(){
+				$('.error-pw').show();
+			});
+
+			$('.error-id').hide();
+			$('btn btn-success col-11').click(function(){
+				if(id == null){
+					$('.error-id').show();
+				}
+			});
+
+		</script>
+			
+	</div>
+</body>
+</html>
