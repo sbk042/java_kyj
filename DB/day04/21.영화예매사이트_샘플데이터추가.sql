@@ -280,3 +280,155 @@ FROM
 	ON RV_MS_NUM = MS_NUM )* 100)
 WHERE
 	MO_NUM = 2;
+
+-- -------------------------------------------------------
+
+-- 'abc123'회원이 콘크리트 유토피아 리뷰를 다음과 같이 작성할 때 쿼리
+-- 콘크리트 유토피아 재미있어요
+INSERT INTO REVIEW(RE_CONTENT, RE_MO_NUM, RE_ME_ID)
+	SELECT 
+    '콘크리트 유토피아 재미있어요.', MO_NUM, 'abc123'
+    FROM
+		MOVIE
+	WHERE
+		MO_TITLE = '콘크리트 유토피아';
+	
+-- 'abc123'회원이 작성한 콘크리트 유토피아 리뷰를 admin회원이 추천을 클릭했을 때 필요한 쿼리를 작성
+-- 단, 리뷰번호는 1번인걸 알고 있다고 가정한다.
+-- 1. 리뷰 테이블에 데이터 추가
+INSERT INTO `LIKE`(ME_ID, RE_NUM) VALUES('admin', 1);
+-- 2. 리뷰 테이블에 추천 수를 업데이트
+UPDATE
+	REVIEW
+SET 
+	RE_TOTAL_LIKE = (SELECT COUNT(*) FROM `LIKE` WHERE RE_NUM = 1)
+WHERE
+	RE_NUM = 1;
+    
+-- admin회원이 1번 리뷰를 추천 취소 했을 때 필요한 쿼리
+-- 취소는 DELETE를 이용
+DELETE FROM `LIKE` WHERE ME_ID = 'admin' AND RE_NUM = 1;
+UPDATE
+	REVIEW
+SET 
+	RE_TOTAL_LIKE = (SELECT COUNT(*) FROM `LIKE` WHERE RE_NUM = 1)
+WHERE
+	RE_NUM = 1;
+    
+-- 영화 콘크리트 유토피아 리뷰를 조회하는 쿼리
+SELECT 
+    MO_TITLE 영화,
+    RE_CONTENT 리뷰
+FROM
+    REVIEW
+JOIN
+	MOVIE ON RE_MO_NUM = MO_NUM
+WHERE
+	RE_MO_NUM = 2;
+
+-- 강사님 버전
+SELECT 
+    *
+FROM
+    REVIEW
+WHERE
+	RE_MO_NUM = (SELECT
+			MO_NUM
+		FROM
+			MOVIE
+		WHERE
+			MO_TITLE = '콘크리트 유토피아');
+
+-- 15세관람가 영화를 조회하는 쿼리
+SELECT 
+    MO_TITLE AS 영화,
+    MO_AG_NAME AS 관람가능연령
+FROM
+    MOVIE
+WHERE
+	MO_AG_NAME = '15세관람가';
+
+-- 이병헌이 출연한 영화를 조회하는 쿼리
+SELECT 
+    MO_TITLE AS 영화,
+    FP_NAME AS 영화인
+FROM
+    MOVIE
+		JOIN -- MOVIE와 FILM_PERSON이 연결되어 있지 않으므로 먼저 ROLE을 JOIN 해준다
+			ROLE ON MO_NUM = RO_MO_NUM
+		JOIN -- ROLE과 연결되어 있는 FILM_PERSON과 JOIN 해준다.
+			FILM_PERSON ON FP_NUM = RO_RP_NUM
+WHERE
+	FP_NAME = '이병헌';
+    
+-- 2023년에 개봉한 영화를 조회하는 쿼리
+SELECT 
+    MO_TITLE AS 영화제목,
+    MO_OPENING_DATE AS 개봉일
+FROM
+    MOVIE
+WHERE 
+	MO_OPENING_DATE LIKE '2023%';
+    
+-- 2023년에 개봉한 한국 영화를 조회하는 쿼리
+SELECT 
+    MO_TITLE AS 영화,
+    MO_OPENING_DATE AS 개봉일,
+    CP_CT_NAME AS 국가
+FROM
+    MOVIE
+	JOIN
+		COUNTRY_PRODUCTION ON MO_NUM = CP_MO_NUM
+WHERE
+	MO_OPENING_DATE LIKE '2023%' 
+AND
+	CP_CT_NAME = '한국';
+
+-- 각 영화의 리뷰수를 조회하는 쿼리
+SELECT 
+	MO_TITLE AS 영화,
+	COUNT(RE_NUM) AS 리뷰수
+FROM MOVIE
+		LEFT JOIN 
+    REVIEW ON MO_NUM = RE_MO_NUM
+GROUP BY MO_NUM;
+    
+-- CGV강남에서 상영하는 모든 영화 스케줄을 조회하는 쿼리
+-- 영화 제목, 상영관위치, 
+SELECT 
+    MO_TITLE AS 영화,
+    MS_START_TIME AS 상영시간,
+    SC_NAME AS 상영관
+FROM
+    MOVIE_SCHEDULE
+        JOIN
+    MOVIE ON MO_NUM = MS_MO_NUM
+        JOIN
+    SCREEN ON SC_NUM = MS_SC_NUM
+WHERE
+    SC_TH_NUM = (SELECT 
+            TH_NUM
+        FROM
+            THEATER
+        WHERE
+            TH_NAME = 'CGV강남');
+
+-- 영화 예매율 순으로 가장 예매율이 높은 영화 1개를 조회하는 쿼리
+-- 예매율이 같은 경우 개봉일이 늦은 영화를 조회
+SELECT 
+    MO_TITLE AS 영화예매율1위
+FROM
+    MOVIE
+-- 정렬은 ORDER BY를 이용
+ORDER BY MO_RESERVATION_RATE DESC, MO_OPENING_DATE ASC
+LIMIT 1;
+		
+
+
+
+
+
+
+
+
+
