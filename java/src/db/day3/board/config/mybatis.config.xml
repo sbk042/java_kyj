@@ -15,7 +15,7 @@
     </environment>
   </environments>
   <mappers>
-    <mapper resource="db/day2/board2/dao/MemberMapper.xml"/>
-    <!-- <mapper resource="db/day2/board2/dao/BoardMapper.xml"/> -->
+    <mapper resource="db/day3/board/dao/MemberMapper.xml"/>
+   	<mapper resource="db/day3/board/dao/BoardMapper.xml"/>
   </mappers>
 </configuration>
