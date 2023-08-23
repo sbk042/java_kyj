@@ -25,6 +25,8 @@ replay_pid*
 .classpath
 .project
 .lock
+.settings/
+meta-inf/
 /.metadata/
 front/naver/naver(강사님).css
 
