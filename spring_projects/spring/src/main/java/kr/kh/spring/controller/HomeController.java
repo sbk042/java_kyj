@@ -17,15 +17,13 @@ public class HomeController {
 	
 	@RequestMapping(value = "/")
 	public String home(Model model) {
-		// È­¸é¿¡ µ¥ÀÌÅÍ¸¦ Àü¼ÛÇÏ´Â ¹æ¹ı model¿¡ ´ã¾Æ¼­ Àü¼ÛÇØ¾ß ÇÑ´Ù.
-		// model.addAllAttributes("È­¸é¿¡¼­ »ç¿ëÇÒ ÀÌ¸§", Àü¼ÛÇÒ °ª);
-		model.addAttribute("name","abc"); //È­¸é¿¡ ³»°¡ ¿øÇÏ´Â µ¥ÀÌÅÍ¸¦ Àü¼Û
+		model.addAttribute("name","abc");
 		return "home";
 	}
 	@RequestMapping(value = "/test1")
 	public String test1(Model model, String id, Integer age) {
-		System.out.println("¾ÆÀÌµğ: " + id);
-		System.out.println("³ªÀÌ : " + age);
+		System.out.println("ì•„ì´ë”” : " + id);
+		System.out.println("ë‚˜ì´ :  " + age);
 		return "test1";
 	}
 }

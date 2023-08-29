@@ -7,17 +7,10 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<!-- url이 /resources/로 시작하면 webapp/resources폴더에서 찾아서 가져옴  -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<!-- 컨트롤러에서 리턴한 값에 prefix와 sufix를 추가하여 만들어진 결과를 이용하여 view(화면)을 선택함 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
@@ -25,12 +18,15 @@
 	
 	<context:component-scan base-package="kr.kh.spring.*" />
 	
-	<beans:bean id="loginInterceptor" class="kr.kh.spring.interceptor.LoginInterceptor"></beans:bean>
+	<bean id="dataSource"
+      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    <property name="url"
+              value="jdbc:mysql://localhost:3306/spring?useSSL=false&amp;serverTimezone=Asia/Seoul">
+    </property>
+    <property name="username" value="root"></property>
+    <property name="password" value="root"></property>
+</bean>
 	
-	<interceptors>
-		<interceptor>
-			<mapping path="/member/login"/>
-			<beans:ref bean="loginInterceptor" />
-		</interceptor>
-	</interceptors>
+	
 </beans:beans>
