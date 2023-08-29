@@ -1,4 +1,4 @@
-package kr.kh.spring.vo;
+package kr.kh.study.vo;
 
 public class MemberVO {
 	private String me_id;
