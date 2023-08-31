@@ -43,6 +43,7 @@ public class MemberController {
 	public String memberLogin() {
 		return "member/login";
 	}
+	// ==========================================================================
 	// 여기서부터는 로그인 구현
 	@PostMapping("/member/login")
 	public String memberLoginPost(Model model,MemberVO member) {
