@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 </head>
 <body>
-	<h1>게시글 등록</h1>
-	<form action="<c:url value='/board/insert'/>" method="post"> <!-- 게시글은 양이 많으므로 post로 전송해야한다. -->
+	<h1>게시글 등록</h1><!-- 게시글은 양이 많으므로 post로 전송해야한다. -->
+	<form action="<c:url value='/board/insert'/>" method="post" enctype="multipart/form-data"> <!-- ebctype 첨부파일을 위한 --> 
 		<div class="form-group">
 			<label>제목</label>
 			<input type="text" class="form-control" name="bo_title">
@@ -21,6 +21,12 @@
 		<div class="form-group">
 			<label>내용</label>
 			<textarea name="bo_contents" id="summernote"></textarea>
+		</div>
+		<div class="form-group">
+			<label>첨부파일</label>
+			<input type="file" class="form-control" name="files">
+			<input type="file" class="form-control" name="files">
+			<input type="file" class="form-control" name="files">
 		</div>
 		<button class="btn btn-outline-success col-12">등록하기</button>
 	</form>
