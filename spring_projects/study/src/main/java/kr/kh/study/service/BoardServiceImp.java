@@ -36,5 +36,15 @@ public class BoardServiceImp implements BoardService{
 		//가져오면 반환
 		return board;
 	}
+	// 3. 게시글 상세 조회 후 조회수 증가
+	@Override
+	public void updateViews(Integer bo_num) {
+		// 매개변수체크
+		if(bo_num == null) {
+			return ;
+		}
+		// 다오에게 게시글 번호를 주면서 조회수를 1증가시키라고 요청한다.
+		boardDao.updateBoardViews(bo_num);
+	}
 	
 }

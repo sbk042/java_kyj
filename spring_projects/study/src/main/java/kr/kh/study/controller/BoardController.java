@@ -30,10 +30,16 @@ public class BoardController {
 	// 2. 게시글 상세 조회하기
 		@GetMapping("/board/detail") // integer는 null을 저장할 수 있기 때문에 Int보다는 Integer로 
 		public String boardDetail(Model model, Integer bo_num) { // 화면에 전달하기 위해서는 model이 필요하다.
+			// 3. 게시글 조회수 증가
+			// 서비스에게 게시글 번호를 주면서 조회수를 1증가하라고 요청한다.
+			// 언제? =>게시글 가져오기 전에 그래서 조회하기 전 코드를 입력해준다.
+			boardService.updateViews(bo_num);
+	// ========================================================================
 			// 서비스에게 게시글 번호를 주면서 상세정보를 가져오라고 요청한다.
 			BoardVO board = boardService.getBoard(bo_num);
 			// 가져온 게시글을 화면에 전송해준다.
 			model.addAttribute("board",board);
 			return "/board/detail";
 		}
+	// 3. 게시글 상세 조회시 주회수 증가 시키기
 	}

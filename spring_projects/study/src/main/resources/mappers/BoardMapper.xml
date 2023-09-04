@@ -9,4 +9,7 @@
 	<select id="selectBoard" resultType="kr.kh.study.vo.BoardVO">
 		select * from board where bo_num = #{bo_num}
 	</select>
+	<update id="updateBoardViews"> <!-- 기존 조회수에서 +1을 해준다. -->
+		update board set bo_views = bo_views + 1 where bo_num = #{bo_num}
+	</update>
 </mapper>
