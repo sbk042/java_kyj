@@ -6,5 +6,7 @@
 	<select id="selectBoardList" resultType="kr.kh.study.vo.BoardVO">
 		select * from board order by bo_num desc <!-- 최신순으로 가져오도록 desc -->
 	</select>
-
+	<select id="selectBoard" resultType="kr.kh.study.vo.BoardVO">
+		select * from board where bo_num = #{bo_num}
+	</select>
 </mapper>
