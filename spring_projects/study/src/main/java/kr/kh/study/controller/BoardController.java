@@ -2,13 +2,17 @@ package kr.kh.study.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import kr.kh.study.service.BoardService;
 import kr.kh.study.vo.BoardVO;
+import kr.kh.study.vo.MemberVO;
 
 @Controller
 public class BoardController {
@@ -41,5 +45,28 @@ public class BoardController {
 			model.addAttribute("board",board);
 			return "/board/detail";
 		}
-	// 3. 게시글 상세 조회시 주회수 증가 시키기
+	// 4. 게시글 등록하기
+		@GetMapping("/board/insert")
+		public String BoardInsert() {
+			return "/board/insert";
+		}
+		@PostMapping("/board/insert")
+		public String boardInsertPost(Model model, BoardVO board, HttpSession session) {
+			// 제목과 내용이 잘 넘어오는지 확인하구
+			//System.out.println(board);
+			
+			MemberVO user = (MemberVO) session.getAttribute("user");
+			
+			// 서비스에게 게시글 정보와 로그인한 회원 정보를 주면서 게시글을 등록하고 시킨다.
+			boolean res = boardService.insertBoard(board, user);
+			if(res) {
+				model.addAttribute("msg", "게시글을 등록했습니다.");
+				model.addAttribute("url", "/board/list");
+			}else {
+				model.addAttribute("msg", "게시글을 등록하지 못했습니다.");
+				model.addAttribute("url", "/board/insert");
+			}
+			
+			return "/util/message";
+		}
 	}

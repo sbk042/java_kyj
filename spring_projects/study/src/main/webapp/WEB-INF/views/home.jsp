@@ -16,5 +16,6 @@
 		<a href="<c:url value='/member/logout'/>">로그아웃</a>
 	</c:if>
 		<a href="<c:url value='/board/list'/>">게시글 리스트</a>
+		<a href="<c:url value='/board/insert'/>">게시글 등록</a>
 </body>
 </html>

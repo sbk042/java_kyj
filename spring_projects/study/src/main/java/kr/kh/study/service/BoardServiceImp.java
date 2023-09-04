@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.kh.study.dao.BoardDAO;
 import kr.kh.study.vo.BoardVO;
+import kr.kh.study.vo.MemberVO;
 
 @Service
 public class BoardServiceImp implements BoardService{
@@ -45,6 +46,22 @@ public class BoardServiceImp implements BoardService{
 		}
 		// 다오에게 게시글 번호를 주면서 조회수를 1증가시키라고 요청한다.
 		boardDao.updateBoardViews(bo_num);
+	}
+	// 4. 게시글 등록하기
+	@Override
+	public boolean insertBoard(BoardVO board, MemberVO user) {
+		// 매개변수체크
+		if(user == null || user.getMe_id() == null) { 
+			return false;
+		}
+		if(board == null || board.getBo_title() == null || board.getBo_title().length() == 0) {
+			return false;
+		}
+		//로그인한 회원 아이디로 작성자를 수정해준다.
+		board.setBo_me_id(user.getMe_id());
+		// DAO에게 게시글 정보를 주면서 게시글을 추가하라고 시키고 추가 여부를 알려달라고 요청한다.
+		boolean res = boardDao.insertBoard(board);
+		return res;
 	}
 	
 }
