@@ -15,5 +15,6 @@
 	<c:if test="${user != nulll }">
 		<a href="<c:url value='/member/logout'/>">로그아웃</a>
 	</c:if>
+		<a href="<c:url value='/board/list'/>">게시글 리스트</a>
 </body>
 </html>
