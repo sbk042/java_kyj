@@ -63,5 +63,38 @@ public class BoardServiceImp implements BoardService{
 		boolean res = boardDao.insertBoard(board);
 		return res;
 	}
-	
+	// 5. 게시글 수정하기
+	@Override
+	public boolean update(BoardVO board, MemberVO user) {
+		// 매개변수체크
+		if(user == null || user.getMe_id() == null) { 
+			return false;
+		}
+		if(board == null || board.getBo_title() == null || board.getBo_title().length() == 0) {
+			return false;
+		}
+		BoardVO dbBoard = boardDao.selectBoard(board.getBo_num());
+		
+		if(dbBoard == null || !dbBoard.getBo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		boolean res = boardDao.updateBoard(board);
+		return res;
+	}
+	// 6. 게시글 삭제하기
+	@Override
+	public boolean deleteBoard(Integer bo_num, MemberVO user) {
+		// 매개변수체크
+		if(user == null || user.getMe_id() == null) { 
+			return false;
+		}
+		if(bo_num == null) {
+			return false;
+		}
+		BoardVO board = boardDao.selectBoard(bo_num);
+		if(board == null || !board.getBo_me_id().equals(user.getMe_id())) {
+			return false;
+		}
+		return boardDao.deleteBoard(bo_num);
+	}
 }

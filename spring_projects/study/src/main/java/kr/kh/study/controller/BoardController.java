@@ -47,7 +47,7 @@ public class BoardController {
 		}
 	// 4. 게시글 등록하기
 		@GetMapping("/board/insert")
-		public String BoardInsert() {
+		public String boardInsert() {
 			return "/board/insert";
 		}
 		@PostMapping("/board/insert")
@@ -57,7 +57,7 @@ public class BoardController {
 			
 			MemberVO user = (MemberVO) session.getAttribute("user");
 			
-			// 서비스에게 게시글 정보와 로그인한 회원 정보를 주면서 게시글을 등록하고 시킨다.
+			// 서비스에게 게시글 정보와 로그인한 회원 정보를 주면서 게시글을 등록하라고 시킨다.
 			boolean res = boardService.insertBoard(board, user);
 			if(res) {
 				model.addAttribute("msg", "게시글을 등록했습니다.");
@@ -67,6 +67,41 @@ public class BoardController {
 				model.addAttribute("url", "/board/insert");
 			}
 			
+			return "/util/message";
+		}
+		//5. 게시글 수정하기
+		@GetMapping("/board/update")
+		public String boardUpdate(Model model,Integer bo_num) {
+			// 게시글 정보를 가져와서 화면에 전송을 한다.
+			BoardVO board = boardService.getBoard(bo_num);
+			model.addAttribute("board",board);
+			return "/board/update";
+		}
+		@PostMapping("/board/update") // 로그인한 회원 정보를 확인 HttpSession
+		public String boardUpdate(Model model, BoardVO board, HttpSession session) { // 화면에서 보내준 게시글 정보를 확인한다. BoardVO
+			
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			//System.out.println(user); 확인용
+			boolean res =boardService.update(board,user);
+			if(res) {
+				model.addAttribute("msg", "게시글을 수정했습니다.");
+			}else {
+				model.addAttribute("msg", "게시글을 수정하지 못했습니다.");
+			}
+			model.addAttribute("url", "/board/detail?bo_num="+board.getBo_num());
+			return "/util/message";
+		}
+		// 6. 게시글 삭제
+		@GetMapping("/board/delete")
+		public String boardDelete(Model model,Integer bo_num, HttpSession session) {
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			boolean res = boardService.deleteBoard(bo_num, user);
+			if(res) {
+				model.addAttribute("msg", "게시글을 삭제했습니다.");
+			}else {
+				model.addAttribute("msg", "게시글을 삭제하지 못했습니다.");
+			}
+			model.addAttribute("url", "/board/list");
 			return "/util/message";
 		}
 	}

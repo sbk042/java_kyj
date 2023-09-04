@@ -10,9 +10,11 @@
 <body>
 	<h1>게시글 상세</h1>
 	<h3>제목 : ${board.bo_title }</h3>
-	<h3>작성자 : ${board.bo_me_id}</h3>
-	<h3>조회수 : ${board.bo_views}</h3>
+	<h3>작성자 : ${board.bo_me_id }</h3>
+	<h3>조회수 : ${board.bo_views }</h3>
 	<hr>
-	<div>${board.bo_contents}</div>
+	<div>${board.bo_contents }</div>
+	<a href="<c:url value='/board/update?bo_num=${board.bo_num}'/>">수정</a>
+	<a href="<c:url value='/board/delete?bo_num=${board.bo_num}'/>">삭제</a>
 </body>
 </html>
