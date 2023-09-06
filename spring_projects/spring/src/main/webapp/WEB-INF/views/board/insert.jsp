@@ -10,6 +10,7 @@
 <body>
 	<h1>게시글 등록</h1><!-- 게시글은 양이 많으므로 post로 전송해야한다. -->
 	<form action="<c:url value='/board/insert'/>" method="post" enctype="multipart/form-data"> <!-- ebctype 첨부파일을 위한 --> 
+		<input type="hidden" name="bo_ori_num" value="${bo_ori_num}">
 		<div class="form-group">
 			<label>제목</label>
 			<input type="text" class="form-control" name="bo_title">

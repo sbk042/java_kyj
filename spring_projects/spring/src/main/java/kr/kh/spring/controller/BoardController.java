@@ -45,7 +45,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/insert")
-	public String insert() {
+	public String insert(Model model, Integer bo_ori_num) {
+		model.addAttribute("bo_ori_num",bo_ori_num == null ? 0 : bo_ori_num);
 		return "/board/insert";
 	}
 	@PostMapping("/insert")
@@ -61,12 +62,14 @@ public class BoardController {
 		return "message";
 	}
 	@GetMapping("/detail")
-	public String detail(Model model, Integer bo_num , Criteria cri) {
+	public String detail(Model model, Integer bo_num , Criteria cri, HttpSession session) {
 		boardService.updateViews(bo_num);
 		BoardVO board = boardService.getBoard(bo_num);
-		// 
+		MemberVO user = (MemberVO) session.getAttribute("user");
+		LikeVO like = boardService.getBoardLike(bo_num, user);
 		model.addAttribute("board", board);
 		model.addAttribute("cri", cri);
+		model.addAttribute("like", like);
 		return "/board/detail";
 	}
 	// 수정 mapping작성 
@@ -122,7 +125,9 @@ public class BoardController {
 		// 추천 : 1, 비추천 : -1, 취소 : 0
 		// 추천 정보를 주면서 서비스한테 
 		int res = boardService.like(likeVo);
+		BoardVO board = boardService.getBoard(likeVo.getLi_bo_num());
 		map.put("res", res);
+		map.put("board", board);
 		return map;
 	}
 }

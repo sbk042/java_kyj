@@ -23,8 +23,18 @@
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.bo_num" >
 		insert into board(bo_num, bo_ori_num, bo_title, bo_contents, bo_me_id)
+		
 		select 
-			ifnull(max(bo_num),0)+1, ifnull(max(bo_num),0)+1,#{board.bo_title}, #{board.bo_contents}
+			ifnull(max(bo_num),0)+1, 
+		<choose>
+			<when test="board.bo_ori_num == 0">
+			ifnull(max(bo_num),0)+1,
+			</when>
+			<otherwise>
+				#{board.bo_ori_num},
+			</otherwise>
+		</choose>	
+			#{board.bo_title}, #{board.bo_contents}
 			,#{board.bo_me_id}
 		from 
 			board
@@ -42,7 +52,7 @@
 				where ${cri.type} like concat('%', #{cri.search}, '%')
 			</otherwise>
 		</choose>
-		order by bo_num desc
+		order by bo_ori_num desc, bo_num asc
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	<select id="selectBoardCount" resultType="int">
@@ -101,5 +111,12 @@
 	<update id="updateLike">
 		update `like` set li_state = #{like.li_state} 
 			where li_bo_num = #{like.li_bo_num} and li_me_id = #{like.li_me_id} 
+	</update>
+	<update id="updateBoardLike">
+		update board set
+			bo_up = (select count(*) from `like` where li_bo_num = #{bo_num} and li_state = 1),
+			bo_down = (select count(*) from `like` where li_bo_num = #{bo_num} and li_state = -1)
+		where
+			bo_num = #{bo_num}
 	</update>
 </mapper>

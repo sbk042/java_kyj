@@ -26,4 +26,6 @@ public interface BoardService {
 	boolean deleteBoard(Integer bo_num, MemberVO user);
 
 	int like(LikeVO likeVo);
+
+	LikeVO getBoardLike(Integer bo_num, MemberVO user);
 }

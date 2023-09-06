@@ -35,7 +35,11 @@
 	      <tr>
 	        <td>${board.bo_num}</td>
 	        <td>
-	        	<a href="<c:url value='/board/detail?bo_num=${board.bo_num}'/>">${board.bo_title}(${board.bo_comment })</a>
+	        	<a href="<c:url value='/board/detail?bo_num=${board.bo_num}'/>">
+	        	<!-- 답글입력문 -->
+	        	<c:if test="${board.bo_num != board.bo_ori_num}"><span style="color:red">답글</span></c:if>
+	        	${board.bo_title}(${board.bo_comment })
+	        	</a>
 	        </td>
 	        <td>${board.bo_me_id }</td>
 	        <td>${board.bo_views }</td>
