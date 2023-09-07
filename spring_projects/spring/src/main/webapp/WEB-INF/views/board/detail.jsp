@@ -70,14 +70,41 @@
 		     </div>
 		  </div>
 		<!-- 댓글 목록창 -->
-		
+		<div class="comment-list">
+			<div class="border rounded-sm border-danger p-3 mt-3 comment-box">
+				<div class="">작성자아이디</div>
+				<div class="input-group mb-3">
+					<div class="col-9">
+						댓글 내용
+					</div>
+					<div class="col-3">
+						작성일
+					</div>
+				</div>
+			</div>
+			<div class="border rounded-sm border-danger p-3 mt-3 comment-box">
+				<div class="">작성자아이디</div>
+				<div class="input-group mb-3">
+					<div class="col-9">
+						댓글 내용
+					</div>
+					<div class="col-3">
+						작성일
+					</div>
+				</div>
+			</div>
+		</div>
 		<!-- 댓글 페이지네이션 -->
+		<ul class="pagination justify-content-center mt-3 comment-pagination">
+		  <li class="page-item"><a class="page-link" href="javascrip:void(0);">Previous</a></li>
+		  <li class="page-item"><a class="page-link" href="javascrip:void(0);">1</a></li>
+		  <li class="page-item"><a class="page-link" href="javascrip:void(0);">2</a></li>
+		  <li class="page-item"><a class="page-link" href="javascrip:void(0);">Next</a></li>
+		</ul>
 	</div>
 	<!-- 추천 기능 자바스크립트 -->
 	<script type="text/javascript">
-	
-	
-	
+
 		// 추천 버튼을 클릭했을 때 콘솔창에 추천이라고 출력하는 코드를 작성하세요.(jquery를 이용해서)
 		$('.btn-like').click(function(){ 
 			if('${user.me_id}' == ''){ // me_id가 빈문자열이면 = 로그인이 되어 있지 않으면
@@ -123,46 +150,191 @@
 			}
 		}
 	
-	
 	</script>
 	
-	<!-- 댓글 기능 자바스크립트 -->
-	<script type="text/javascript">
-		$('[name=co_contents]').focus(function(){
-			if('${user.me_id}' == ''){
-				if(confirm('댓글을 작성하려면 로그인 해야합니다. 로그인을 하겠습니까?')){
-					location.href = '<c:url value="/member/login"/>';
-				}
-				$(this).blur();
-				return;
+<!-- 댓글 기능 자바스크립트 -->
+<script type="text/javascript">
+	// 로그인하지 않고 댓글 창을 활성화했을 때 처리하기 위한 코드
+	$('[name=co_contents]').focus(function(){
+		if('${user.me_id}' == ''){
+			if(confirm('댓글을 작성하려면 로그인 해야합니다. 로그인을 하겠습니까?')){
+				location.href = '<c:url value="/member/login"/>';
 			}
+			$(this).blur();
+			return;
+		}
+	});
+	// 댓글 등록버튼을 클릭했을 때 실행되어야 하는 코드
+	$('.btn-comment-insert').click(()=>{
+		// 로그인 확인
+		if('${user.me_id}' == ''){
+			if(confirm('댓글을 작성하려면 로그인 해야합니다. 로그인을 하겠습니까?')){
+				location.href = '<c:url value="/member/login"/>';
+			}
+			return;
+		} // 로그인을 했으면
+		let co_contents = $('[name=co_contents]').val();
+		// 댓글 내용 확인 
+		if(co_contents == ''){ // 빈 문자열이면
+			alert('내용을 입력하세요.');
+			return;
+		}
+		let comment ={
+				co_contents : co_contents,
+				co_bo_num : '${board.bo_num}',
+				co_me_id : '${user.me_id}'
+		}
+		// 댓글을 등록
+		ajaxJsonToJson(false,'post','/comment/insert',comment,(data)=>{ /*(data) => 이거는 서버에서 보낸 데이터이다.  */
+			if(data.res){
+				alert('댓글을 등록됐습니다.');
+				$('[name=co_contents]').val('');
+			}else{
+				alert('댓글을 등록하지 못했습니다.');
+			}
+			cri.page = 1; //현재 페이지 정보를 1로 만들어준다.
+			getCommentList(cri);
 		});
-		$('.btn-comment-insert').click(()=>{
-			if('${user.me_id}' == ''){
-				if(confirm('댓글을 작성하려면 로그인 해야합니다. 로그인을 하겠습니까?')){
-					location.href = '<c:url value="/member/login"/>';
-				}
-				return;
+	});
+	
+	
+	//댓글 수정하기
+	$(document).on('click','.btn-comment-update', function(){
+		revertBox();
+		let commentBox = $(this).parents('.comment-box')
+		changeBox(commentBox);
+	}) 
+	$(document).on('click','.btn-update-complete', function(){
+		let co_num = $(this).parents('.comment-box').find('[name=co_num]').val();
+		let co_contents = $(this).parents('.comment-box').find('[name=co_contents]').val();
+		
+		if(co_contents == ''){
+			alert("내용을 입력하세요.");
+			return;
+		}
+		
+		let comment = {
+			co_num : co_num,
+			co_me_id : '${user.me_id}',
+			co_contents : co_contents 
+		}
+		
+		ajaxJsonToJson(false,'post','/comment/update', comment ,(data)=>{ 
+			if(data.res){
+				alert('댓글을 수정했습니다.')
+			}else{
+				alert('댓글을 수정하지 못했습니다.')
 			}
-			let co_contents = $('[name=co_contents]').val();
-			if(co_contents == ''){ // 빈 문자열이면
-				alert('내용을 입력하세요.');
-				return;
-			}
-			let comment ={
-					co_contents : co_contents,
-					co_bo_num : '${board.bo_num}',
-					co_me_id : '${user.me_id}'
-			}
-			ajaxJsonToJson(false,'post','/comment/insert',comment,(data)=>{ /*(data) => 이거는 서버에서 보낸 데이터이다.  */
-				if(data.res){
-					alert('댓글을 등록됐습니다.');
-					$('[name=co_contents]').val('');
-				}else{
-					alert('댓글을 등록하지 못했습니다.');
-				}
-			});
+			getCommentList(cri);
 		});
-	</script>
+	});
+	
+	// 현재 페이지 정보 입력( 밑에 있는 cri와 다르다. )
+	let cri = {
+			page : 1, // 현재 기본 페이지는 1페이지
+			perPageNum : 2, // 댓글을 한 번에 두 개씩 가져오기
+			
+	}
+	// 게시글이 화면에 출력되고 이어서 댓글이 화면에 출력되어야 하기 때문에 이벤트 등록 없이 바로 호출해준다.(이벤트 등록 => 클릭했을 시, 호버했을시 등등...)
+	getCommentList(cri);
+	
+	
+	// 댓글 수정
+	function revertBox(){
+		$('[name=co_contents]').remove();
+		$('.btn-update-complete').remove();
+		$('.contents-box').show();
+		$('.btn-group').show();
+	}
+	function changeBox(commentBox){ // commentBox를 매개변수로 전달을 받는다.
+		// 요소라는 의미로 $를 붙여줬음
+		let $contentsBox = commentBox.find('.contents-box');
+		let contents = $contentsBox.text().trim();
+		$contentsBox.hide().after('<textarea class="form-control col-9" name="co_contents">'+contents+'</textarea>');
+		let $btnGroup = commentBox.find('.btn-group');
+		$btnGroup.hide().after('<button class="btn btn-outline-success btn-update-complete">수정완료</button>')
+	}
+	
+	
+	
+	// 이름을 호출 되는게 함수 개체를 호출되는게 메서드..?
+	// 현재 페이지 정보가 주어지면 현재 페이지에 맞는 댓글 리스트를 가져와서 화면에 출력하는 함수이다.
+	function getCommentList(cri){ //cri = 현재 페이지 정보
+		ajaxJsonToJson(false,'post','/comment/list/${board.bo_num}',cri,(data)=>{ /*(data) => 이거는 서버에서 보낸 데이터이다.  */
+			// 댓글리스트 추가
+			createCommentList(data.list, '.comment-list');
+		
+			createPagination(data.pm, '.comment-pagination');
+		});		
+	}
+	function createPagination(pm, target){
+		let str = '';
+		if(pm.prev){
+			str += `<li class="page-item"><a class="page-link" href="javascrip:void(0);" onclick="cri.page=\${pm.startPage-1};getCommentList(cri)">이전</a></li>`;
+		}
+		for(i=pm.startPage; i<=pm.endPage; i++){
+			let active = pm.cri.page == i ? 'active' : '';
+			str += `
+			<li class="page-item \${active}">
+				<a class="page-link" href="javascrip:void(0);" onclick="cri.page=\${i};getCommentList(cri)">\${i}</a>
+			</li>`;			
+		}
+		if(pm.next){
+			str += `<li class="page-item"><a class="page-link" href="javascrip:void(0);" onclick="cri.page=\${pm.endPage+1};getCommentList(cri)">다음</a></li>`;		
+		}
+		$(target).html(str);
+	}
+	
+	// 댓글 리스트가 주어지면 댓글을 만들어서 target안에 넣어주는 함수
+	function createCommentList(commentList, target){
+		let str = '';
+		if(commentList.length == 0){
+			str = '<div class="border rounded-sm border-danger p-3 mt-3">등록된 댓글이 없습니다.</div>';
+		}
+		for(comment of commentList){
+			let btnStr = '';
+			if('${user.me_id}' == comment.co_me_id){
+				btnStr = `
+				<div class="btn-group">
+					<button class="btn btn-outline-warning btn-comment-update" data-num="\${comment.co_num}">수정</button>
+					<button class="btn btn-outline-danger btn-comment-delete" onclick="deleteComment(\${comment.co_num})">삭제</button>
+				</div>
+				`;
+			}
+			str += `
+				<div class="border rounded-sm border-danger p-3 mt-3 comment-box">
+					<input type="hidden" name="co_num" value="\${comment.co_num}">
+					<div class="">\${comment.co_me_id}</div>
+					<div class="input-group mb-3">
+						<div class="col-9 contents-box">
+							\${comment.co_contents}
+						</div>
+						<div class="col-3">
+							작성일
+						</div>
+					</div>
+					\${btnStr}
+				</div>`;
+		} 
+		$(target).html(str);
+	}
+	//댓글을 삭제하는 함수
+	function deleteComment(co_num){
+		let comment = {
+				co_num : co_num,
+				co_me_id : '${user.me_id}',
+				co_bo_num : '${board.bo_num}'
+		}
+		ajaxJsonToJson(false,'post','/comment/delete', comment ,(data)=>{
+			if(data.res){
+				alert('댓글을 삭제했습니다.')
+			}else{
+				alert('댓글을 삭제하지 못했습니다.')
+			}
+			cri.page = 1;
+			getCommentList(cri); 
+		});	
+	}
+</script>
 </body>
 </html>
