@@ -29,6 +29,23 @@
 	<h2>댓글</h2>
 	<textarea rows="" cols="" placeholder="댓글 등록" id="inputComment"></textarea>
 	<button id="btnCommentInsert">댓글 등록</button>
+	<div class="box-comment">
+		<ul class="comment-list">
+			<li class="comment-item">
+				<span class="comment-contents">댓글1</span>
+				<span class="comment-writer">[작성자]</span>
+				<button>수정</button>
+				<button>삭제</button>
+			</li>
+		</ul>
+		<div class="pagination">
+			<a href="#"> 이전</a>
+			<a href="#"> 1</a>
+			<a href="#"> 다음</a>
+		</div>
+	</div>
+	
+	
 	<script type="text/javascript" src="//code.jquery.com/jquery-3.6.1.js"></script>
 	<script type="text/javascript">
 		$('#btnCommentInsert').click(function(){
@@ -68,12 +85,46 @@
 					if(data.res){
 						alert('댓글 등록 성공');
 						$('#inputComment').val('');
+						cri.page = 1;
+						getCommentList(cri);
 					}else{
 						alert('댓글 등록 실패');
 					}
 				}
 			})
 		});
+		let cri ={
+				page : 1, // 기본 페이지
+				perPageNum : 3, // 한번에 몇페이지 까지 볼 수 있는지 정하기
+				
+		}
+		getCommentList(cri);
+		// 현재 페이지 정보(Cri)를 주면서 
+		function getCommentList(Cri){
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/comment/list/"/>'+'${board.bo_num}',
+				data: JSON.stringify(cri), //cri를 넣어준다.(현재페이지 정보를 보내줌)
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				success : function(data){ /*<= 이름을 꼭 data로 할 필요는 없다.  */
+					// 빈 문자열 선언해주고
+					let str = '';
+					for(comment of data.list){
+						// 역다음표로 li태그를 감싸준다.
+						str += `
+						<li class="comment-item">
+							<span class="comment-contents">\${comment.co_contents}</span>
+							<span class="comment-writer">[\${comment.co_me_id}]</span>
+							<button>수정</button>
+							<button>삭제</button>
+						</li>`
+					}
+					$('.comment-list').html(str);
+				}
+			})
+		}
 	</script>
 </body>
 </html>
