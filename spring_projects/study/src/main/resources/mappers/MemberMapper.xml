@@ -27,6 +27,6 @@
 			member
 		where
 			<!-- 현재 시간보다 완료시간이 뒤에 있는 -->
-			me_session_id = #{me_session_id} and me_session_limit >=  now()
+			me_session_id = #{me_session_id} and me_session_limit >= now()
 	</select>
 </mapper>
