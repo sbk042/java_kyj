@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.spring.dao.BoardDAO">
 	<resultMap type="kr.kh.spring.vo.BoardVO" id="BoardVO">
-		<id property="bo_num" column="bo_num"/> <!-- column = 속성이름 -->
+		<id property="bo_num" column="bo_num"/>
 		<result property="bo_ori_num" column="bo_ori_num"/>
 		<result property="bo_views" column="bo_views"/>
 		<result property="bo_up" column="bo_up"/>
@@ -14,26 +14,33 @@
 		<result property="bo_title" column="bo_title"/>
 		<result property="bo_me_id" column="bo_me_id"/>
 		<result property="bo_contents" column="bo_contents"/>
-		<result property="bo_reg_date" column="bo_reg_date"/>
 		<result property="bo_up_date" column="bo_up_date"/>
-		<!-- selectFileList => 게시글 번호(bo_num)가 주어지면 첨부파일을 가져오는 작업을 한다.   -->
+		<result property="bo_reg_date" column="bo_reg_date"/>
 		<collection property="fileVoList" ofType="kr.kh.spring.vo.FileVO" column="bo_num" select="selectFileList"/>
 	</resultMap>
-	
-	
+	<resultMap type="kr.kh.spring.vo.BoardTypeVO" id="BoardTypeVO">
+		<id property="bt_num" column="bt_num"/>
+		<result property="bt_title" column="bt_title"/>
+		<collection 
+			property="baList" 
+			ofType="kr.kh.spring.vo.BoardAuthorityVO" 
+			column="bt_num" 
+			select="selectBoardAuthorityList"/>
+	</resultMap>
+
 	<insert id="insertBoard" useGeneratedKeys="true" keyProperty="board.bo_num" >
 		insert into board(bo_num, bo_ori_num, bo_title, bo_contents, bo_me_id)
 		
 		select 
 			ifnull(max(bo_num),0)+1, 
 		<choose>
-			<when test="board.bo_ori_num == 0">
-			ifnull(max(bo_num),0)+1,
+			<when test="board.bo_ori_num == 0">	
+				ifnull(max(bo_num),0)+1,
 			</when>
 			<otherwise>
 				#{board.bo_ori_num},
 			</otherwise>
-		</choose>	
+		</choose>
 			#{board.bo_title}, #{board.bo_contents}
 			,#{board.bo_me_id}
 		from 
@@ -42,13 +49,11 @@
 	<select id="selectBoardList" resultType="kr.kh.spring.vo.BoardVO">
 		select * from board
 		<choose>
-			<!-- 0이 전체 검색/ cri.type이 0과 같다면 -->
 			<when test='cri.type.equals("0")'>
-				where bo_title like concat('%', #{cri.search}, '%')or
-					bo_contents like concat("%", #{cri.search}, '%')
+				where bo_title like concat('%', #{cri.search}, '%') or 
+					bo_contents like concat('%', #{cri.search}, '%')
 			</when>
 			<otherwise>
-			<!--mapper에서 #은 해당 값을 문자열로 처리해주고 $는 그 상태 그대로 들어간다. -->
 				where ${cri.type} like concat('%', #{cri.search}, '%')
 			</otherwise>
 		</choose>
@@ -58,13 +63,11 @@
 	<select id="selectBoardCount" resultType="int">
 		select count(*) from board
 		<choose>
-			<!-- 0이 전체 검색/ cri.type이 0과 같다면 -->
 			<when test='cri.type.equals("0")'>
-				where bo_title like concat('%', #{cri.search}, '%')or
-					bo_contents like concat("%", #{cri.search}, '%')
+				where bo_title like concat('%', #{cri.search}, '%') or 
+					bo_contents like concat('%', #{cri.search}, '%')
 			</when>
 			<otherwise>
-			<!--mapper에서 #은 해당 값을 문자열로 처리해주고 $는 그 상태 그대로 들어간다. -->
 				where ${cri.type} like concat('%', #{cri.search}, '%')
 			</otherwise>
 		</choose>
@@ -101,16 +104,15 @@
 		delete from board where bo_num = #{bo_num}
 	</delete>
 	<select id="selectLike" resultType="kr.kh.spring.vo.LikeVO">
-		<!-- 테이블이라는 의미를 부여하기 위해 역다운표를 like에 넣었다. -->
 		select * from `like` where li_bo_num = #{li_bo_num} and li_me_id = #{li_me_id}
 	</select>
 	<insert id="insertLike">
-		insert into `like` (li_bo_num, li_me_id, li_state) 
+		insert into `like`(li_bo_num, li_me_id, li_state) 
 		values(#{like.li_bo_num},#{like.li_me_id},#{like.li_state})
 	</insert>
 	<update id="updateLike">
 		update `like` set li_state = #{like.li_state} 
-			where li_bo_num = #{like.li_bo_num} and li_me_id = #{like.li_me_id} 
+			where li_bo_num = #{like.li_bo_num} and li_me_id = #{like.li_me_id}
 	</update>
 	<update id="updateBoardLike">
 		update board set
@@ -124,5 +126,34 @@
 			bo_comment = (select count(*) from comment where co_bo_num = #{bo_num})
 		where
 			bo_num = #{bo_num}
+	</update>
+	<select id="selectBoardTypeList" resultMap="BoardTypeVO">
+		select * from board_type
+	</select>
+	<select id="selectBoardAuthorityList" resultType="kr.kh.spring.vo.BoardAuthorityVO">
+		select * from board_authority where ba_bt_num = #{bt_num}
+	</select>
+	<insert id="insertBoardType" useGeneratedKeys="true" keyProperty="bt.bt_num">
+		insert into board_type(bt_title) values(#{bt.bt_title})
+	</insert>
+	<insert id="insertBoardAuthority">
+		insert into board_authority(ba_bt_num, ba_authority)
+		values(#{ba_bt_num},#{ba_authority})
+	</insert>
+	<select id="selectBoardCountByBoardType" resultType="int">
+		select count(*) from board where bo_bt_num = #{bo_bt_num}
+	</select>
+	<select id="selectBoardTypeCount" resultType="int">
+		select count(*) from board_type
+	</select>
+	<delete id="deleteBoardType">
+		delete from board_type where bt_num = #{bt_num}
+	</delete>
+	<update id="updateBoardType">
+		update board_type
+		set
+			bt_title = #{bt.bt_title}
+		where
+			bt_num = #{bt.bt_num}
 	</update>
 </mapper>
