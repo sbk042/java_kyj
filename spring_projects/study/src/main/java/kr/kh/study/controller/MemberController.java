@@ -48,11 +48,15 @@ public class MemberController {
 	@PostMapping("/member/login")
 	public String memberLoginPost(Model model,MemberVO member) {
 		String msg, url;
-		MemberVO user = memberService.login(member); //membervo에게 로그인 정보를 불러온다.
+		//membervo에게 로그인 정보를 불러온다.
+		MemberVO user = memberService.login(member);
 		
 		if(user != null) {
 			msg = "로그인 성공!";
 			url = "/";
+			// 로그인을 성공했으면 ( 자동로그인 설정 )
+			user.setAutoLogin(member.isAutoLogin());
+			
 		}else {
 			msg ="로그인 실패!";
 			url ="/member/login";
@@ -62,6 +66,7 @@ public class MemberController {
 		model.addAttribute("user",user);
 		return "util/message";
 	}
+	// 로그아웃 구현
 	@GetMapping("/member/logout")
 	public String memberLogout(Model model, HttpSession session) {
 		String msg="로그아웃 성공!", url="/";

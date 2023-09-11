@@ -12,6 +12,9 @@
 	<form action="<c:url value='/board/insert'/>" method="post">
 			<input type="text"  name="bo_title" placeholder="제목"><br>
 			<textarea rows="20" cols="30" name="bo_contents" placeholder="내용"></textarea>
+			<input type="file" name="files"> <br>
+			<input type="file" name="files"> <br>
+			<input type="file" name="files"> <br>
 			<button>등록</button>
 	</form>
 </body>

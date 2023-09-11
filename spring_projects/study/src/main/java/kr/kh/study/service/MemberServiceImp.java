@@ -74,4 +74,22 @@ public class MemberServiceImp implements MemberService{
 		}
 		return null;
 	}
+
+	// 자동로그인
+	@Override
+	public void updateMemberSession(MemberVO user) {
+		// 아이디가 없으면 업데이트를 하지 못하게 막아주고
+		if(user == null || user.getMe_id() == null) {
+			return;
+		}
+		// 있으면 업데이트를 하게 다오에게 시킨다.
+		memberDao.updateMemberSession(user);
+		
+	}
+
+
+	@Override
+	public MemberVO getMemberBySessoion(String me_session_id) {
+		return memberDao.selectMemberBySession(me_session_id);
+	}
 }
