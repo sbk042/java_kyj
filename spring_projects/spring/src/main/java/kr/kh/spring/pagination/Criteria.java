@@ -9,6 +9,7 @@ public class Criteria {
 //=====================================================
 	private String type; // 검색타입
 	private String search; // 검색어
+	private int bt_num; // 게시판타입번호
 	
 	public Criteria() {
 		page = 1;
@@ -30,9 +31,9 @@ public class Criteria {
 		return (page - 1) * perPageNum;
 	}
 	public String getUrl(int page) {
-		return "?page=" + page + "&type="+type+"&search="+search;
+		return "?page=" + page + "&type="+type+"&search="+search+"&bt_num="+bt_num;
 	}
 	public String getCurrentUrl() {
-		return "?page=" + page + "&type="+type+"&search="+search;
+		return "?page=" + page + "&type="+type+"&search="+search+"&bt_num="+bt_num;
 	}
 }

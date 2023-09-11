@@ -20,6 +20,7 @@ import kr.kh.spring.pagination.Criteria;
 import kr.kh.spring.pagination.PageMaker;
 import kr.kh.spring.service.BoardService;
 import kr.kh.spring.util.Message;
+import kr.kh.spring.vo.BoardTypeVO;
 import kr.kh.spring.vo.BoardVO;
 import kr.kh.spring.vo.LikeVO;
 import kr.kh.spring.vo.MemberVO;
@@ -39,15 +40,24 @@ public class BoardController {
 		int totalCount = boardService.getTotalCount(cri);
 		PageMaker pm = new PageMaker(3, cri, totalCount);
 		
+		List<BoardTypeVO> typeList =boardService.getBoardTypeList();
+		
 		model.addAttribute("pm", pm);
 		model.addAttribute("list", list);
+		model.addAttribute("typeList",typeList);
 		return "/board/list";
 	}
 	
 	@GetMapping("/insert")
-	public String insert(Model model, Integer bo_ori_num) {
+	public String insert(Model model, Integer bo_ori_num, HttpSession session) {
+		//로그인한 회원이 작성 가능한 게시판 타입을 가져와야 함.
+		//로그인한 회원 정보 
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		
-		model.addAttribute("bo_ori_num",bo_ori_num == null ? 0 : bo_ori_num);
+		List<BoardTypeVO> typeList = boardService.getBoardTypeList(user);
+			
+		model.addAttribute("bo_ori_num", bo_ori_num == null ? 0 : bo_ori_num);
+		model.addAttribute("typeList", typeList);
 		return "/board/insert";
 	}
 	@PostMapping("/insert")
@@ -73,44 +83,36 @@ public class BoardController {
 		model.addAttribute("like", like);
 		return "/board/detail";
 	}
-	// 수정 mapping작성 
 	@GetMapping("/update")
-	public String update(Model model, Integer bo_num, HttpSession session) { // 기존 게시글 번호를 가져온다. (Integer bo_num)
-		// 게시글 정보 가져오기
-		BoardVO board = boardService.getBoard(bo_num); // 첨부파일까지 다 포함된 정보를 가져온다.
-		
+	public String update(Model model,Integer bo_num, HttpSession session) {
+		BoardVO board = boardService.getBoard(bo_num);
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		// 로그인을 안 했거나 게시글이 없거나 작성자가 아닌 경우는 안내문구를 보여주고 다시 게시글리스트로 돌아가는 코드이다.
 		if(user == null || board == null || !user.getMe_id().equals(board.getBo_me_id())) {
 			Message msg = new Message("/board/list", "잘못된 접근입니다.");
 			model.addAttribute("msg", msg);
 			return "message";
 		}
-		// 가져온 뒤 화면에 전달만 하면 끝!
-		model.addAttribute("board",board);
+		model.addAttribute("board", board);
 		return "/board/update";
-	}	
-	@PostMapping("/update") 
-	public String updatePost(Model model, 
-							BoardVO board, //수정된 게시글 받아오기 BoardVO board
-							MultipartFile[] files, // 새로 추가된 첨부파일들
-							Integer[] delFiles,  // 삭제된 첨부파일들
-							HttpSession session) { //
+	}
+	@PostMapping("/update")
+	public String updatePost(Model model, BoardVO board, 
+			MultipartFile[] files, Integer[] delFiles, HttpSession session) {
 		Message msg;
 		MemberVO user = (MemberVO)session.getAttribute("user");
-		if(boardService.updateBoard(board, files, delFiles, user)) {
+		if(boardService.updateBoard(board, files, delFiles,user)) {
 			msg = new Message("/board/detail?bo_num="+board.getBo_num(), "게시글을 수정했습니다.");
 		}else {
-			msg = new Message("/board/update?bo_num="+board.getBo_num(), "게시글을 수정하지 못했습니다.");
+			msg = new Message("/board/update?bo_num="+board.getBo_num(), "게시글을 수정하지 못했습니다."); 
 		}
-		model.addAttribute("msg",msg);
+		model.addAttribute("msg", msg);
 		return "message";
 	}
 	@GetMapping("/delete")
 	public String delete(Model model, HttpSession session, Integer bo_num) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		Message msg;
-		if(boardService.deleteBoard(bo_num, user)) { // 게시글 정보와 사용자 정보를 주며 boardService한테 삭제하라고 시킴
+		if(boardService.deleteBoard(bo_num, user)) {
 			msg = new Message("/board/list", "게시글을 삭제했습니다.");
 		}else {
 			msg = new Message("/board/list", "잘못된 접근입니다.");
@@ -122,9 +124,8 @@ public class BoardController {
 	@ResponseBody
 	@PostMapping("/like")
 	public Map<String, Object> ajaxTest(@RequestBody LikeVO likeVo){
-		Map<String,Object> map = new HashMap<String, Object>();
-		// 추천 : 1, 비추천 : -1, 취소 : 0
-		// 추천 정보를 주면서 서비스한테 
+		Map<String, Object> map = new HashMap<String, Object>();
+		//추천 : 1, 비추천 : -1, 취소: 0
 		int res = boardService.like(likeVo);
 		BoardVO board = boardService.getBoard(likeVo.getLi_bo_num());
 		map.put("res", res);
