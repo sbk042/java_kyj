@@ -93,14 +93,94 @@
 				}
 			})
 		});
+		// 댓글을 삭제하는 버튼 기능실현
+		// 중복이 안되므로 document로 만들어줘야한다.
+		$(document).on('click', '.btn-del',function(){
+			
+			let comment = {
+					// 내가 클릭한 버튼 중에 num이라는 데이터를 가져와주세요
+					co_num : $(this).data('num')
+			}
+			
+			// ajax로 서버에 전송
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/comment/delete"/>',
+				data: JSON.stringify(comment),
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				success : function(data){ /*<= 이름을 꼭 data로 할 필요는 없다.  */
+					if(data.res){
+						alert('댓글 삭제 성공!')
+						getCommentList(cri);
+					}else{
+						alert('댓글 삭제 실패!');
+					}
+				}
+			});
+		})
+		// 댓글수정하기
+		// 클래스는 . 을 붙여준다. => .btn-update
+		$(document).on('click','.btn-update',function(){
+			// 내가 클릭한수정 버튼에 부모중에서 comment item을 찾아서 comment-contents를 숨긴다. 
+			// 자주 쓰기 위해서 item으로 저장해둔다.
+			let item = $(this).parents('.comment-item');
+			
+			item.find('.comment-contents').hide();
+			//작성자,수정버튼,삭제버튼 hide시키기
+			item.find('.comment-writer').hide();
+			item.find('.btn-update').hide();
+			item.find('.btn-del').hide();
+			
+			// 내가 클릭한 수정완료 버튼의 co_num을 가져온다.
+			let co_num = $(this).data('num');
+			// 기존에 적어 놨던 댓글을 그대로 가져온다.
+			let co_contents = item.find('.comment-contents').text();
+			// 수정할 요소가 사라진 뒤 댓글을 수정할 수 있는 창이 뜬다.
+			item.find('.comment-contents').after(`<textarea class="comment-update">\${co_contents}</textarea>`);
+			// 수정 완료 버튼 추가
+			item.find('.btn-del').after(`<button class="btn-complete" data-num="\${co_num}">수정완료</button>`);
+			
+		});
+		// 수정완료버튼 btn-copmplete를 클릭 했을 때
+		$(document).on('click','.btn-complete',function(){
+			// 내가 클릭한 data의 num을 가져온다.( 댓글 번호 )
+			let co_num = $(this).data('num');
+			let co_contents = $(this).parents('.comment-item').find('.comment-update').val(); // val() : value값을 가져온다.
+			let comment = {
+				co_num : co_num,
+				co_contents : co_contents
+				// ajax로 넘길 준비 완료
+			}
+			$.ajax({
+				async : false,
+				method : 'post',
+				url : '<c:url value="/comment/update"/>',
+				data: JSON.stringify(comment),
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				success : function(data){ /*<= 이름을 꼭 data로 할 필요는 없다.  */
+					console.log(data)
+					if(data.res){
+						alert('댓글 수정 성공!')
+						getCommentList(cri);
+					}else{
+						alert('댓글 수정 실패!');
+					}
+				}
+			});
+		})
+		
 		let cri ={
 				page : 1, // 기본 페이지
 				perPageNum : 3, // 한번에 몇페이지 까지 볼 수 있는지 정하기
 				
 		}
 		getCommentList(cri);
+		
 		// 현재 페이지 정보(Cri)를 주면서 
-		function getCommentList(Cri){
+		function getCommentList(cri){
 			$.ajax({
 				async : false,
 				method : 'post',
@@ -112,13 +192,18 @@
 					// 빈 문자열 선언해주고
 					let str = '';
 					for(comment of data.list){
-						// 역다음표로 li태그를 감싸준다.
+						let btnStr = '';
+						if('${user.me_id}' == comment.co_me_id){
+							btnStr = `
+								<button class="btn-update" data-num="\${comment.co_num}">수정</button>
+								<button class="btn-del" data-num="\${comment.co_num}">삭제</button>
+							`;
+						}
 						str += `
 						<li class="comment-item">
 							<span class="comment-contents">\${comment.co_contents}</span>
 							<span class="comment-writer">[\${comment.co_me_id}]</span>
-							<button>수정</button>
-							<button>삭제</button>
+							\${btnStr}
 						</li>`
 					}
 					$('.comment-list').html(str);

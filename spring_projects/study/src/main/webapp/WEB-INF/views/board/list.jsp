@@ -20,12 +20,12 @@
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach items="${list}" var="board"> <!-- var는 꺼냈을 때의 이름 -->
+			<c:forEach items="${list}" var="board">
 				<tr>
-					<td>${board.bo_num}</td> <!-- get방식은 ? 내가 보내려는 이름을 쓰고 값을 써준다. -->
-					<td><a href="<c:url value='/board/detail?bo_num=${board.bo_num}'/>">${board.bo_title}</a></td>
-					<td>${board.bo_me_id}</td> 
-					<td>${board.bo_views}</td>
+					<td>${board.bo_num}</td>
+					<td><a href="<c:url value='/board/detail?bo_num=${board.bo_num}'/>">${board.bo_title }(${board.bo_comment})</a></td>
+					<td>${board.bo_me_id }</td>
+					<td>${board.bo_views }</td>
 					<td>${board.bo_up}/${board.bo_down}</td>
 				</tr>
 			</c:forEach>
@@ -42,6 +42,6 @@
 			<a href="<c:url value='/board/list${pm.cri.getUrl(pm.endPage+1) }'/>">다음</a>
 		</c:if>
 	</div>
-	<a href="<c:url value='/board/insert'/>"><button>게시판 글쓰기</button></a>
+	<a href="<c:url value='/board/insert'/>"><button>글쓰기</button></a>
 </body>
 </html>
