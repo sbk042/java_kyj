@@ -122,8 +122,32 @@
 						</li>`
 					}
 					$('.comment-list').html(str);
+					//< 페이지네이션 배치하기 >
+					let pm = data.pm;
+					//( 위에서 빈문자열로 선언해주고 썼음) 밑에서 다시 초기화해서 선언해준다.
+					str = '';
+					// 이전 버튼을 배치
+					if(pm.prev){
+					// 클릭 했을 때 페이지를 바꿔야 하므로 역다운표를 넣었다.
+					// += : 이어붙이기
+					// #을 이용하면 클릭 할 때마다 위로 올라가기 때문에 javascript:void(0)를 선언해서 c:url을 쓰지 않겠다는 뜻이다
+						str += `<a href="javascript:void(0);" onclick="changePage(\${pm.startPage-1})">이전</a>`;
+					}
+					// 숫자 버튼을 배치( 여러개니까 숫자는 반복문 )
+					for(i = pm.startPage; i<=pm.endPage; i++){
+						str += `<a href="javascript:void(0);" onclick="changePage(\${i})"> \${i}</a>`
+					}
+					// 다음 버튼을 배치
+					if(pm.next){
+						str += `<a href="javascript:void(0);" onclick="changePage(\${pm.startPage+1})">다음</a>`
+					}
+					$('.pagination').html(str);
 				}
 			})
+		}
+		function changePage(page){
+			cri.page = page;
+			getCommentList(cri);
 		}
 	</script>
 </body>
