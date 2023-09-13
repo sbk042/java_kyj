@@ -71,6 +71,10 @@ public class MemberController {
 	public String memberLogout(Model model, HttpSession session) {
 		String msg="로그아웃 성공!", url="/";
 		
+		// 자동로그인 로그아웃 구현
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		user.setMe_session_limit(null);
+		memberService.updateMemberSession(user);
 		session.removeAttribute("user");
 
 		model.addAttribute("url",url);
