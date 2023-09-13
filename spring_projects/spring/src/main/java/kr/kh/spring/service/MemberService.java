@@ -12,5 +12,7 @@ public interface MemberService {
 
 	MemberVO getMemberBySession(String session_id);
 
+	boolean sendMail(String to, String title, String contents);
+
 
 }
