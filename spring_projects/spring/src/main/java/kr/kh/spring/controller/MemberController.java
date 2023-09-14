@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.kh.spring.service.MemberService;
 import kr.kh.spring.util.Message;
@@ -70,5 +72,11 @@ public class MemberController {
 		model.addAttribute("msg", msg);
 		return "message";
 	}
+	// 아이디 중복여부
+		@ResponseBody //이걸 추가 해야 ajax가 실행이 된
+		@PostMapping("/member/check/id")// RequestParam으로 하나 하나씩 받기
+		public Object ajaxTest3(@RequestParam("id")String id){
+			return memberService.checkId(id);
+		}
 	
 }

@@ -14,5 +14,7 @@ public interface MemberService {
 
 	boolean sendMail(String to, String title, String contents);
 
+	Object checkId(String id);
+
 
 }
