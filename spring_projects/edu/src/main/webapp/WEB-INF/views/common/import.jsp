@@ -7,5 +7,3 @@
 <script src="<c:url value='/resources/static/js/jquery.min.js'/>"></script>
 <script src="<c:url value='/resources/static/js/popper.min.js'/>"></script>
 <script src="<c:url value='/resources/static/js/bootstrap.bundle.min.js'/>"></script>
-
-<c:url value='/resources/static/js/bootstrap.bundle.min.js'/>
