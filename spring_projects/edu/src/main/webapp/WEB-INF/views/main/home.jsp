@@ -6,10 +6,7 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<a href="<c:url value='?id=abc'/>">?를 이용하여 전송</a><br>
+	<a href="<c:url value='/abc'/>">경로에 데이터를 전송</a>
 </body>
 </html>
