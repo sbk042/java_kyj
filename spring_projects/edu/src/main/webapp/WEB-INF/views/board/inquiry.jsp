@@ -3,11 +3,10 @@
     pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>게시글 조회</title>
 </head>
 <body>
-	<a href="<c:url value='?id=abc'/>">?를 이용하여 전송</a><br>
-	<a href="<c:url value='/abc'/>">경로에 데이터를 전송</a>
+<h1>게시글 조회</h1>
 	
 </body>
 </html>
