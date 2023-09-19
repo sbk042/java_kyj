@@ -13,7 +13,7 @@
 	// msg가 빈 문자열이면 잘못된 접근입니다. 아니면 msg출력
 	msg = msg == '' ? '잘못된 접근입니다.' : msg;
 	alert(msg);
-	location.href = '<c:url value=""/>' + url;
+	location.href = '<c:url value="/"/>' + url;
 	
 </script>
 </body>
