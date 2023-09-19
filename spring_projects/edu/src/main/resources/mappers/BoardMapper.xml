@@ -4,4 +4,53 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.kh.edu.dao.BoardDAO">
 	
+	<select id="selectBoardList" resultType="BoardVO">
+		select * from board
+		<!-- 전체 검색 -->
+		<if test='cri.t == "all"'>
+		where 
+			bo_title like concat('%', #{cri.s}, '%')
+			or bo_contents like concat('%', #{cri.s}, '%')
+			or bo_me_id like concat('%', #{cri.s}, '%')
+		</if>
+		
+		<if test='cri.t == "total"'>
+		where
+			bo_title like concat('%', #{cri.s}, '%')
+		or bo_contents like concat('%', #{cri.s}, '%')
+		</if>
+		
+		<if test='cri.t == "writer"'>
+		where
+			bo_me_id like concat('%', #{cri.s}, '%')
+		</if>	
+		
+		<!-- asc : 오름차순 / desc : 내림차순 -->
+		order by bo_ori_num desc, bo_num asc
+		<!-- pageStart : 몇 페이지에서 시작할 건지 -->
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<!-- 페이지네이션 -->
+	<select id="selectCountBoardList" resultType="int">
+	select count(*) from board
+		<!-- 전체 검색 -->
+		<if test='cri.t == "all"'>
+		where 
+			bo_title like concat('%', #{cri.s}, '%')
+			or bo_contents like concat('%', #{cri.s}, '%')
+			or bo_me_id like concat('%', #{cri.s}, '%')
+		</if>
+		
+		<if test='cri.t == "total"'>
+		where
+			bo_title like concat('%', #{cri.s}, '%')
+		or bo_contents like concat('%', #{cri.s}, '%')
+		</if>
+		
+		<if test='cri.t == "writer"'>
+		where
+			bo_me_id like concat('%', #{cri.s}, '%')
+		</if>	
+	</select>
 </mapper>
