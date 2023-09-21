@@ -15,6 +15,8 @@
 		<div class="form-group">
 			<input type="password" name="me_pw" class="form-control" placeholder="비밀번호">
 		</div>
+		<input type="checkbox" name ="autoLogin" id="autoLogin">자동로그인</input>
+		<label for="autoLogin"></label>
 		<button class="btn btn-success col-12">로그인</button>
 	</form>
 </body>

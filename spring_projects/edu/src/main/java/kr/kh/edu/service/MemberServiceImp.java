@@ -78,4 +78,19 @@ public class MemberServiceImp implements MemberService {
 		}
 		return Pattern.matches(regexPw, pw);
 	}
+
+	// 자동로그인
+	@Override
+	public void updateMemberSession(MemberVO user) {
+		if( user == null ) {
+			return;
+		}
+		memberDao.updateMemberSession(user);
+		
+	}
+
+	@Override
+	public MemberVO getMemberBySessionId(String sId) {
+		return memberDao.selectMemberBySessionId(sId);
+	}
 }

@@ -69,4 +69,22 @@
 		insert into file(fi_name, fi_ori_name, fi_bo_num)
 		values(#{file.fi_name},#{file.fi_ori_name},#{file.fi_bo_num})
 	</insert>
+	<!-- 게시글 상세 정보 조회 -->
+	<select id="selectBoard" resultType="boardVO">
+		select 
+			* 
+		from 
+			board
+		where
+			bo_num = #{num}
+			<!-- DAO에서 Param에 num이라고 적었기 때문에 bo_num이 아닌 num으로 작성해야한다. -->
+	</select>
+	<select id="selectFileList" resultType="FileVO">
+		select
+			*
+		from
+			file
+		where
+			fi_bo_num = #{num}
+	</select>
 </mapper>

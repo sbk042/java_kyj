@@ -13,7 +13,10 @@
 	<annotation-driven />
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- 경로에 resources가 들어가 있으면 resources주소아래에 있는 거에서 찾아보겠습니다. -->
 	<resources mapping="/resources/**" location="/resources/" />
+	<!-- 경로에 download가 들어가 있으면 location주소로 들어가 찾겠습니다.  -->
+	<resources mapping="/download/**" location="file:///D:/uploadfiles/" />
 
 	<!-- 기본 view resolver -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -38,11 +41,16 @@
 	</beans:bean>
 		
 	<beans:bean id="loginInterceptor" class="kr.kh.edu.interceptor.LoginInterceptor" />
+	<beans:bean id="autoLoginInterceptor" class="kr.kh.edu.interceptor.AutoLoginInterceptor" />
 	
 	<interceptors>
 		<interceptor>
 			<mapping path="/member/login"/>
 			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/**"/>
+			<beans:ref bean="autoLoginInterceptor"/>
 		</interceptor>
 	</interceptors>
 	
