@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>input태그값 예제</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="container"></div>
+		<script type="text/babel">
+			const container = document.getElementById('container');
+			//요소 만들기
+			function App(){
+				// 내용을 입력하세요를 initText에 넣기
+				const initText = "내용을 입력하세요."
+				// initText로 초기화 해준다.(text초기값은 initText인 "내용을 입력하세요"임)
+				let [text, setText] = React.useState(initText);
+				
+				function onChange(event){
+					//event.target.value를 통해 input태그의 내용이 바뀔 때 입력된 내용을 가져올 수 있다.
+					let value = event.target.value;
+					// value값이 빈문자열과 같으면 'initText'를 출력 아니면 그대로 value값을 출력
+					setText(value == '' ? initText : value);
+				}
+				
+				return(
+					<div>
+						<input type="text" onChange={onChange}/>					
+						<h1>{text}</h1>
+					</div>
+				);
+			}
+			ReactDOM.render(<App/>, container);
+		</script>
+
+</body>
+</html>
