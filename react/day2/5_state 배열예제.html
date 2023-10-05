@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>state 배열 예제</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		const root = document.getElementById("root");
+
+		function App(){
+			// 여기에다 배열을 만들면 계속 유지가 되지 않는다.
+			// let arr = [];
+
+			// 1. 항상 state를 이용해서 배열 생성해야됨
+			let [arr, setArr] = React.useState([]);
+			// 2. 입력받은 값을 저장할 곳이 필요함
+			let [input, setInput] = React.useState("");
+
+			// 3. input태그에 입력되는 걸 input배열에 실시간으로 받음
+			const onChange = (event)=> setInput(event.target.value)
+
+			// 4. 입력 후 버튼을 눌렀을 때 arr배열에 추가하는 코드 작성
+			const onClick = () =>{
+				// 현재 input태그에 있는 값을 배열 뒤에 추가
+				setArr((beforeArr)=>[...beforeArr, input]);
+				// input 태그의 글자를 지워줌
+				setInput("");
+			}
+			return(
+				<div>
+					<input type="text" onChange={onChange} value={input}/>
+					<button onClick={onClick}>버튼</button>
+					<h1>{arr.join(',')}</h1>
+				</div>
+			);
+		}
+		ReactDOM.render(<App/>, root);
+	</script>
+</body>
+</html>
