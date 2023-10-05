@@ -29,7 +29,10 @@
 			const reset = ()=>setAmount(0);
 			// disabled 바꾸기( 둘 다 가능 )
 			// const convert = ()=>setFliped((item)=> !item)
-			const convert = ()=>setFliped(!fliped);
+			const convert = ()=>{
+				setAmount(0);
+				setFliped(!fliped)
+			};
 
 			return(
 				<div>
