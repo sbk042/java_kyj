@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>props예제2</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		const root = document.getElementById("root");
+		/*
+			Btn 컴포넌트를 생성한 후, Btn 컴포넌트를 이용하여 버튼1과 버튼2를 만들고
+			버튼1을 클릭하면 버튼2가 토굴(보이면 안 보이게, 안보이면 보이게)되도록 작성하여라
+		*/
+		//1. btn 컴포넌트를 이용 text를 추가 해준다.
+		function Btn({text, click, show}){
+			return(
+				// 4. click 이벤트 넣어주기
+				//<button onClick={click}>{text}</button>
+				// 6. show가 true이면 button을 나오게 하고 아니면 null로 return 한다.(4번 고쳐주기)
+					show ? <button onClick={click}>{text}</button> : null
+				);
+			}
+		function App(){
+			// 5. useState 만들기
+			let [show, setShow] = React.useState(true);
+			
+			// 3. clickFunc 이벤트 등록하기
+			const clickFunc = ()=>{ 
+				setShow(!show);
+			};
+			// 2. 버튼 생성
+			return(
+				<div>
+					<Btn text="버튼1" click={clickFunc} show={true}/>
+					<Btn text="버튼2" show={show}/>
+				</div>
+			);
+		}
+		Btn.propTypes = {
+
+		}
+		ReactDOM.render(<App/>, root);
+	</script>
+</body>
+</html>
