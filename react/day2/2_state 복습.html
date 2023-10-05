@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>state 복습</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		const root = document.getElementById("root");
+
+		function App(){
+			// 0 번지에는 초기값이 들어가 있는 배열 
+			// 1 번지에는 값을 변경할 수 있는 setter
+			let [num, setNum] = React.useState(0);
+			
+			function onClick(){
+				// 1. setter를 통해 특정 값을 넘겨주는 경우
+				//setNum(num+1);
+
+				// 2. setter를 통해 함수를 넘겨주는 경우
+				//setNum((beforeNum)=>beforeNum+1)
+
+				setNum((beforeNum)=>{
+					return beforeNum+1
+				})
+			}
+
+			return(
+			<div>
+				<button onClick={onClick}>버튼</button>
+				<h1>{num}</h1>
+			</div>
+			);
+		}
+		ReactDOM.render(<App/>, root);
+	</script>
+</body>
+</html>
