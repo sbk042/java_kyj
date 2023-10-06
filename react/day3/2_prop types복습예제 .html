@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>props 복습예제</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<!-- propTypes를 사용하기 위해 script 추가-->
+	<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+</head>
+<body>
+	<div id="root">
+		<script type="text/babel">
+			const root = document.getElementById("root");
+
+			function Btn({text, color, fontSize}){
+				return(
+					<button style={{backgroundColor : color, fontSize}}>{text}</button>
+				);
+			}
+
+			function App(){
+				return(
+					<div>
+						<Btn text="버튼1" color="red" fontSize={30} />
+						<Btn text="버튼2" color="tomato" fontSize={20}/>
+						<Btn text="버튼3" color="yellow" fontSize={10}/>
+						<Btn text="버튼4" color="gray"/>
+						<Btn text="버튼5" color="#00ff00"/>
+					</div>
+				);
+			}
+
+			Btn.propsTypes = {
+				text : PropTypes.string.isRequired,// 타입은 문자열, isRequired 필수항목으로 지정
+				color :  PropTypes.string,// 타입은 문자열
+				fontSize :  PropTypes.number// 타입은 숫자
+			};
+			ReactDOM.render(<App/>, root);
+		</script>
+	</div>
+</body>
+</html>
