@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>props 복습예제</title>
+	<script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+	<!--
+		버튼1, 버튼2, ..., 버튼5로 된 버튼 5개를 화면에 배치해보세요.
+	-->
+	
+	<div id="root">
+		<script type="text/babel">
+			// 위에서 추가한 요소를 가져온다.
+			const root = document.getElementById("root");
+			
+			// 방법1.) props를 잘 모르겠다.
+			// 5개의 컴포넌트를 만들어서 배치
+			// let|const|var 함수명 = (매개변수들) =>{ }
+			const Btn1 = () => <button>버튼1</button>;
+			const Btn2 = () => <button>버튼2</button>;
+			const Btn3 = () => <button>버튼3</button>;
+			const Btn4 = () => <button>버튼4</button>;
+			const Btn5 = () => <button>버튼5</button>;
+
+			// 방법2.) props를 사용할 수 있겠다!
+			// 하나의 컴포넌트로 5개를 배치한거임
+			// 부모가 text로 전달한 이름 text를 내가 원하는 매개변수를 {}안에 넣어주면 된다.
+			// 태그 안에 넣어주는거기 때문에 {}중괄호로 넣어준다.
+			// 변수 이름과 속성이름이 같으면 생략이 가능하기 때문에 fonSize 하나만 적어줘도 된다.
+			// => 원래는 fontSize : fontSize 로 적어줘야됨
+			function Btn({text, color, fontSize}){
+				return(
+					// 폰트사이즈는 정수여야한다.
+					<button style={{backgroundColor : color, fontSize}}>{text}</button>
+				);
+			}
+
+			function App(){
+				return(
+					<div>
+						<Btn1/>
+						<Btn2/>
+						<Btn3/>
+						<Btn4/>
+						<Btn5/>
+						<br/>
+						<Btn text="버튼1" color="red" fontSize={30} />
+						<Btn text="버튼2" color="tomato" fontSize={20}/>
+						<Btn text="버튼3" color="yellow" fontSize={10}/>
+						<Btn text="버튼4" color="gray"/>
+						<Btn text="버튼5" color="#00ff00"/>
+					</div>
+				);
+			}
+			ReactDOM.render(<App/>, root);
+		</script>
+	</div>
+</body>
+</html>
