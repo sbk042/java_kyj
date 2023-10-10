@@ -9,6 +9,7 @@ function Main2(){
 	const navigate = useNavigate();
 	const sendData = ()=> {
 		navigate('/menu3',{
+			// 내가 보내고 싶은 내용을 state라는 속성에 객첼를 담아서 보내준다.
 			state : {
 				id : id,
 				pw : pw
