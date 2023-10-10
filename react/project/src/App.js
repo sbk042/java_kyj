@@ -1,16 +1,25 @@
 // Header.js로 부터 Header를 가져오겠다.
 import Header from "./Header";
 import Main from "./Main";
+import Main2 from "./Main2";
+import Main3 from "./Main3";
 import Footer from "./Footer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 function App() {
   return (
-    // 부모가 여러개이면 빨간 줄이 뜨기 때문에 하나의 닫는 태그 감싸 져야 한다.
-    <div className="App">
-      <Header/>
-      <Main/>
-      <Footer/>
-    </div>
+    
+    <BrowserRouter>
+      <div className="App">
+        <Header/>
+        <Routes>
+          <Route path="/" exact element={<Main/>}></Route>
+          <Route path="/menu2" element={<Main2/>}></Route>
+          <Route path="/menu3" element={<Main3/>}></Route>
+        </Routes>
+        <Footer/>
+      </div>
+    </BrowserRouter>
   );
 }
 
